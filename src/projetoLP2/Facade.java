@@ -31,9 +31,11 @@ public class Facade {
 	public void cadastrarDeputado(String dni, String dataDeInicio) {
 		cp.cadastrarDeputado(dni, dataDeInicio);
 	}
+
+	public String exibirPessoa(String dni){return cp.exibePessoa(dni);}
 	
 	public static void main(String[] args) {
-		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt"};
+		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt","testes-eco/use_case_3.txt"};
 		EasyAccept.main(args);
 	}
 }

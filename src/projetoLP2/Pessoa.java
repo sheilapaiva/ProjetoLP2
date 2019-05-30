@@ -169,7 +169,7 @@ public class Pessoa {
 				if (i == interesse.length - 1) {
 					a += interesse[i];
 				}else {
-					a += interesse[i] + ", ";
+					a += interesse[i] + ",";
 				}
 			}
 			pessoa += a;

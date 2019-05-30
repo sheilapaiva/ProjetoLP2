@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Representacao do sistema de controle de 
  * de pessoas para cadastrar tais pessoas.
  * 
- * @author Andre Santana e Caio Arruda
+ * @author Andre Santana, Caio Arruda e Joao Romao
  *
  */
 public class CrudPessoa {
@@ -177,5 +177,37 @@ public class CrudPessoa {
 		} catch (ParseException pe) {
 			throw new IllegalArgumentException("Erro ao cadastrar deputado: data invalida");
 		}	
+	}
+
+	/**
+	 * Exibe a Pessoa indicada pelo dni.
+	 * @param dni dni da pessoa cadastrada(identificacao)
+	 * @return  Dados da pessoa cadastrada no formato de String.
+	 * @throws IllegalArgumentException Erro ao exibir pessoa: dni invalido
+	 * @throws IllegalArgumentException Erro ao exibir pessoa: dni nao pode ser vazio ou nulo
+	 * @throws NullPointerException Erro ao exibir pessoa: pessoa nao encontrada
+	 */
+	public String exibePessoa(String dni){
+		String saida = "";
+
+		if(!verificaDni(dni)){
+			throw new IllegalArgumentException("Erro ao exibir pessoa: dni invalido");
+		}
+
+		if(dni == null || dni.isEmpty()){
+			throw new IllegalArgumentException("Erro ao exibir pessoa: dni nao pode ser vazio ou nulo");
+		}
+		if(!mapPessoa.containsKey(dni)){
+			throw new NullPointerException("Erro ao exibir pessoa: pessoa nao encontrada");
+		}
+
+		if (mapaDeputados.containsKey(dni)){
+			saida += mapaDeputados.get(dni).toString();
+
+		}
+		else{
+			saida += mapPessoa.get(dni).toString();
+		}
+		return saida;
 	}
 }

@@ -102,6 +102,28 @@ class TesteCrudPessoa {
 		}
 	}
 
+	@Test
+	void testExibePessoa(){
+		cp.cadastrarPessoa("jose", "123456789-0", "PE", "saude,educacao,ensino");
+		assertEquals("jose - 123456789-0 (PE) - Interesses: saude,educacao,ensino",cp.exibePessoa("123456789-0"));
+		try{
+			cp.exibePessoa("");
+		}catch (IllegalArgumentException msg) {
+			assertEquals(msg.getMessage(),"Erro ao exibir pessoa: dni nao pode ser vazio ou nulo");
+		}
+		try{
+			cp.exibePessoa("987654321-0");
+		}catch(NullPointerException msg){
+			assertEquals(msg.getMessage(),"Erro ao exibir pessoa: pessoa nao encontrada");
+		}
+		try{
+			cp.exibePessoa(" 987654321-0");
+		}catch(IllegalArgumentException msg){
+			assertEquals(msg.getMessage(),"Erro ao exibir pessoa: dni invalido");
+		}
+
+	}
+
 
 }
 

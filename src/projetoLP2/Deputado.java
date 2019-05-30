@@ -56,7 +56,10 @@ public class Deputado {
 	 * Representação textual de um Deputado.
 	 */
 	public String toString() {
-		return "Deputado [pessoa=" + pessoa + ", dataInicio=" + dataInicio + ", qtdLeis=" + qtdLeis + "]";
+		String diaInicio = dataInicio.substring(0, 2);
+		String mesInicio = dataInicio.substring(2, 4);
+		String anoInicio = dataInicio.substring(4, 8);
+		return "POL: " + pessoa.toString() + " - " + diaInicio+"/"+mesInicio+"/"+anoInicio + " - " + qtdLeis + " Leis";
 	}
 	
 }
