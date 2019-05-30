@@ -72,7 +72,7 @@ public class Pessoa {
 	
 	
 	/**
-	 * pega o nome da pessoa.
+	 * retorna o nome da pessoa.
 	 * @return nome.
 	 */
 	public String getNome() {
@@ -80,7 +80,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * pega o documento nacional de identificacao.
+	 * retorna  o documento nacional de identificacao.
 	 * @return dni
 	 */
 	public String getDni() {
@@ -88,7 +88,7 @@ public class Pessoa {
 	}
 	
 	/**
-	 * pega o Estado de origem da pessoa.
+	 * retorna o Estado de origem da pessoa.
 	 * @return origem.
 	 */
 	public String getOrigem() {
@@ -96,7 +96,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * pega o partido politico da pessoa.
+	 * retorna o partido politico da pessoa.
 	 * @return partido
 	 */
 	public String getPartido() {
