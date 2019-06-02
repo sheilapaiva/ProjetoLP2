@@ -1,22 +1,19 @@
 package projetoLP2;
 
 /**
- * Representacao de pessoa que sera cadastrada no Sistema.
- * Identificado por nome, dni, origem, partido e interesses
- * da pessoa.
+ * Representacao de uma pessoa. Uma pessoa é representada por um nome, dni, origem, partido e interesses.
  * 
- * @author Andre Santana
- *
+ * @author Andre Santana, Caio Arruda, João Vitor e Sheila Paiva
  */
 public class Pessoa {
 	
 	/**
-	 * nome da pessoa.
+	 * Nome da pessoa.
 	 */
 	private String nome;
 	
 	/**
-	 * documento nacional de identificacao da pessoa.
+	 * Documento nacional de identificacao da pessoa.
 	 */
 	private String dni;
 	
@@ -26,24 +23,23 @@ public class Pessoa {
 	private String origem;
 	
 	/**
-	 * partido politico da pessoa (opcional).
+	 * Partido politico da pessoa.
 	 */
 	private String partido;
 	
 	/**
-	 * interesses da pessoa.
+	 * Interesses da pessoa.
 	 */
 	private String interesses;
 	
 	/**
-	 * Constroi a pessoa a ser cadastrada no sistema, passando por parametro 
-	 * o nome, o documento nacional de identificacao, o Estado de origem e
-	 *  os interesses da pessoa.
+	 * Constroi uma pessoa, a partir do seu nome, o documento nacional de identificacao, o estado de origem e
+	 * os interesses da pessoa.
 	 * 
-	 * @param nome
-	 * @param dni
-	 * @param origem
-	 * @param interesses
+	 * @param nome, o nome da pessoa
+	 * @param dni, o documento nacional de identificacao
+	 * @param origem, a origem da pessoa
+	 * @param interesses, os interesses da pessoa
 	 */
 	public Pessoa(String nome, String dni, String origem, String interesses) {
 		this.nome = nome;
@@ -53,14 +49,14 @@ public class Pessoa {
 	}
 	
 	/**
-	 * Constroi a pessoa a ser cadastrada no sistema, passando por parametro 
-	 * o nome, o documento nacional de identificacao, o Estado de origem, os
-	 * interesses e o partido politico da pessoa.
-	 * @param nome
-	 * @param dni
-	 * @param origem
-	 * @param interesses
-	 * @param partido
+	 * Constroi uma pessoa, a partir do seu nome, o documento nacional de identificacao, o estado de origem,
+	 * interesses da pessoa e o partido.
+	 * 
+	 * @param nome, o nome da pessoa
+	 * @param dni, o documento nacional de identificacao
+	 * @param origem, a origem da pessoa
+	 * @param interesses, os interesses da pessoa
+	 * @param partido, o partido da pessoa
 	 */
 	public Pessoa(String nome, String dni, String origem, String interesses, String partido) {
 		this.nome = nome;
@@ -70,53 +66,56 @@ public class Pessoa {
 		this.interesses = interesses;
 	}
 	
-	
 	/**
-	 * retorna o nome da pessoa.
-	 * @return nome.
+	 * Retorna uma String que representa o nome da pessoa.
+	 * 
+	 * @return uma String que representa o nome
 	 */
 	public String getNome() {
 		return nome;
 	}
 
 	/**
-	 * retorna  o documento nacional de identificacao.
-	 * @return dni
+	 * Retorna uma String que representa o documento nacional de identificacao da pessoa.
+	 * 
+	 * @return uma String que representa o documento nacional de identificacao
 	 */
 	public String getDni() {
 		return dni;
 	}
 	
 	/**
-	 * retorna o Estado de origem da pessoa.
-	 * @return origem.
+	 * Retorna uma String que representa o estado de origem da pessoa.
+	 * 
+	 * @return  uma String que representa o estado de origem
 	 */
 	public String getOrigem() {
 		return origem;
 	}
 
 	/**
-	 * retorna o partido politico da pessoa.
-	 * @return partido
+	 * Retorna uma String que representa o partido politico da pessoa.
+	 * 
+	 * @return uma String que representa o partido
 	 */
 	public String getPartido() {
 		return partido;
 	}	
 	
 	/**
-	 * pega os interesses da pessoa.
-	 * @return interesses
+	 * Retorna uma String que representa os interesses da pessoa.
+	 * 
+	 * @return uma String que representa os interesses
 	 */
 	public String getInteresses() {
 		return interesses;
 	}
 	
-
 	/**
-	 * Metodo criado para alocar na memoria o documento nacional de
-	 * identificacao atraves de valores inteiros. E assim, comparar
-	 * no metodo Equals. 
-	 */
+	* Retorna a um inteiro referente uma representação númerica do objeto.
+	* 
+	* @return a um valor inteiro que representa o objeto.
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -126,10 +125,12 @@ public class Pessoa {
 	}
 
 	/**
-	 * Metodo desenvolvido com o intuito de comparar objetos, verificando
-	 * se duas pessoas sao iguais, caso tenha o mesmo documento nacional
-	 * de identificacao.
-	 */
+	* Retorna a um boolean referente a comparação de um novo objeto Pessoa a ser 
+	* criado com os outras Pessoas já existentes, uma pessoa é igual a outra se as 
+	* seus dni são iguais.
+	* 
+	* @return a um boolean.
+	*/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -148,11 +149,10 @@ public class Pessoa {
 	}
 
 	/**
-	 * Retorna a String que representa o nome, o documento nacional de identificacao,
-	 * o Estado de origem da pessoa cadastrada, caso tal pessoa possua um partido po-
-	 * litico e interesses, tambem serao retornados como String.
+	 * Retorna a String que representa uma Pessoa.
+	 * A representação segue o formato: "nome - dni (origen) - partido(se houver) - Interessses: interesse, ..., interesse"
 	 * 
-	 * @return a representacao em String da pessoa. 
+	 * @return a representacao em String do nome, dni, origem, partido e interesses de uma Pessoa. 
 	 */
 	@Override
 	public String toString() {
@@ -160,22 +160,9 @@ public class Pessoa {
 		if (this.partido != null) {
 			pessoa += " - " + this.partido;
 		}
-		if (this.interesses.length() > 0) {
-			
-			String a = " - Interesses: ";
-			String[] interesse = this.interesses.split(",");
-			
-			for (int i = 0; i < interesse.length; i++) {
-				if (i == interesse.length - 1) {
-					a += interesse[i];
-				}else {
-					a += interesse[i] + ",";
-				}
-			}
-			pessoa += a;
+		if (this.interesses != null && this.interesses.length() > 0) {
+			pessoa += " - Interesses: " + this.interesses;
 		}
 		return pessoa;
 	}
-
-
 }

@@ -5,23 +5,29 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import projetoLP2.ControleGeral;
+import projetoLP2.ControlePessoa;
 
-class TesteControleGeral {
-
-	ControleGeral cp;
+class TesteControlePessoa {
+	
+	ControlePessoa cp;
 	
 	@BeforeEach
 	void setUp() {
-		cp = new ControleGeral();
-		
+		cp = new ControlePessoa();
 		cp.cadastrarPessoa("jose", "123456789-0", "PE", "saude,educacao,ensino");
 		cp.cadastrarPessoa("roberto", "123456789-2", "PE", "educacao,ensino", "UNB");
 		cp.cadastrarPessoa("joao", "123456789-1", "PB", "saude,educacao", "UNB");
 		cp.cadastrarDeputado("123456789-1", "05052019");
-		
-		cp.cadastrarPartido("ABC");
-		cp.cadastrarPartido("ANB");
+	}
+	
+	@Test
+	void testeVerificaDniValido() {
+		assertTrue(cp.verificaDni("123456789-0")); 
+	}
+	
+	@Test
+	void testeVerificaDniInvalido() {
+		assertFalse(cp.verificaDni("AA3456789-0")); 
 	}
 	
 	@Test
@@ -287,6 +293,33 @@ class TesteControleGeral {
 	}
 	
 	@Test
+	void testeValidaDataInvalida1() {
+		try {
+			cp.validaData("020319");
+		} catch (RuntimeException nv) {
+			assertEquals(nv.getMessage(), "Erro ao cadastrar deputado: data invalida");
+		}
+	}
+	
+	@Test
+	void testeValidaDataInvalida2() {
+		try {
+			cp.validaData("31042019");
+		} catch (RuntimeException nv) {
+			assertEquals(nv.getMessage(), "Erro ao cadastrar deputado: data invalida");
+		}
+	}
+	
+	@Test
+	void testeValidaDataFutura() {
+		try {
+			cp.validaData("07092019");
+		} catch (RuntimeException nv) {
+			assertEquals(nv.getMessage(), "Erro ao cadastrar deputado: data futura");
+		}
+	}
+	
+	@Test
 	void testExibePessoaDniInvalido(){
 		try{
 			cp.exibirPessoa("A23456789-0");
@@ -326,34 +359,5 @@ class TesteControleGeral {
 	void testExibePessoaValido(){
 		assertEquals(cp.exibirPessoa("123456789-0"), "jose - 123456789-0 (PE) - Interesses: saude,educacao,ensino");
 	}
-	
-	@Test
-	void testeCadastrarPartidoNomeNulo() {
-		try {
-			cp.cadastrarPartido(null);
-		} catch (RuntimeException nn) {
-			assertEquals(nn.getMessage(), "Erro ao cadastrar partido: partido nao pode ser vazio ou nulo");
-		} 
-	}
-	
-	@Test
-	void testeCadastrarPartidoNomeVazio() {
-		try {
-			cp.cadastrarPartido("");
-		} catch (RuntimeException nv) {
-			assertEquals(nv.getMessage(), "Erro ao cadastrar partido: partido nao pode ser vazio ou nulo");
-		}
-	}
-	
-	@Test
-	void testeCadastrarPartidoValido() {
-		cp.cadastrarPartido("PET");
-		assertEquals(cp.exibirBase(), "ABC,ANB,PET");
-	}
-	
-	@Test
-	void testeExibeBase() {
-		assertEquals(cp.exibirBase(), "ABC,ANB");
-	}
-	
 }
+

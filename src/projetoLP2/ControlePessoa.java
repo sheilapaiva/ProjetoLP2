@@ -7,50 +7,36 @@ import java.util.Date;
 import java.util.HashMap;
 	
 /**
- * Representacao do sistema de controle de 
- * de pessoas para cadastrar tais pessoas.
+ * Representação de um Controle de Pessoa, responsável por cadastrar uma pessoa, deputado ou listar pessoa.
  * 
- * @author Andre Santana, Caio Arruda e Joao Romao
- *
+ * @author Andre Santana, Caio Arruda, João Vitor e Sheila Paiva
  */
-public class CrudPessoa {
+public class ControlePessoa {
 	
 	/**
-	 * Representa um mapa de pessoas.
+	 * Mapa de pessoas.
 	 */
 	private HashMap<String, Pessoa> mapPessoa;
 	
 	/**
-	 * Representa um mapa de Deputados.
+	 * Mapa de Deputados.
 	 */
-	private HashMap<String, Deputado> mapaDeputados;
+	private HashMap<String, Deputado> mapDeputados;
 
 	/**
-	 * Constroi um crud de pessoas.
-	 * 
-	 * @param mapPessoa
-	 * @param mapaDeputados
+	 * Constroi um controle de pessoas.
 	 */
-	public CrudPessoa() {
+	public ControlePessoa() {
 		this.mapPessoa = new HashMap<>();
-		this.mapaDeputados = new HashMap<>();
+		this.mapDeputados = new HashMap<>();
 	}
 	
 	/**
-	 * retorna mapa de pessoa.
-	 * 
-	 * @return mapPessoa
-	 */
-	public HashMap<String, Pessoa> getMapPessoa() {
-		return mapPessoa;
-	}
-	
-	/**
-	 * metodo criado para verificar se o documento nacional de
+	 * Retorne a um boolean, depois de verificar se o documento nacional de
 	 * identificacao possui os caracteres corretos, composto 
-	 * apenas por numeros e o traco (-).
+	 * apenas por numeros e o traco(-).
 	 * 
-	 * @param dni
+	 * @param dni, o dni da pessoa
 	 * @return um valor boolean
 	 */
 	public boolean verificaDni(String dni) {
@@ -63,19 +49,19 @@ public class CrudPessoa {
 	}
 
 	/**
-	 * Cadastra pessoa no mapa de pessoa, tendo como identificador o documento
-	 * nacional de identificacao, cadastrando o nome, o documento nacional de 
-	 * identificacao, o Estado, e os interesses se tal pessoa tiver.
+	 * Cadastra uma pessoa no mapa de pessoa. A partir do nome, identificador, estado e interesses
+	 * da pessoa. Se esses campos não estiverem nulos ou vazios e forem validos. Usa o identficador 
+	 * como chave para o mapa.
 	 * 
 	 * @param nome, o nome da pessoa
 	 * @param dni, documento nacional de identificacao da pessoa
 	 * @param estado, Estado de origem da pessoa
 	 * @param interesses, interesses da pessoa
-	 * @throws IllegalArgumentException, campo nome nao pode ser vazio ou nulo!
-	 * @throws IllegalArgumentException, campo DNI nao pode ser vazio ou nulo!
-	 * @throws IllegalArgumentException, campo Estado nao pode ser vazio ou nulo!
-	 * @throws IllegalArgumentException, campo DNI invalido!
-	 * @throws IllegalArgumentException, pessoa ja cadastrada!
+	 * @throws IllegalArgumentException, campo nome nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo dni nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo Estado nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo dni invalido
+	 * @throws IllegalArgumentException, pessoa ja cadastrada
 	 */
 	public void cadastrarPessoa(String nome, String dni, String estado, String interesses) {
 		if (nome == null || nome.isEmpty()) {
@@ -94,22 +80,20 @@ public class CrudPessoa {
 	}
 	
 	/**
-	 * Cadastra pessoa no mapa de pessoa, tendo como identificador o documento
-	 * nacional de identificacao, cadastrando o nome, o documento nacional de 
-	 * identificacao, o Estado da pessoa e caso tenha interesses e partido 
-	 * ocorre tambem o cadastradamento de tais.
+	 * Cadastra uma pessoa no mapa de pessoa. A partir do nome, identificador, estado, interesses
+	 * e o partido da pessoa. Se esses campos não estiverem nulos ou vazios e forem validos. 
+	 * Usa o identficador como chave para o mapa.
 	 * 
 	 * @param nome, o nome da pessoa
 	 * @param dni, documento nacional de identificacao da pessoa
 	 * @param estado, Estado de origem da pessoa
 	 * @param interesses, interesses da pessoa
-	 * @param partido, partido politico da pessoa
-	 * @throws IllegalArgumentException, campo nome nao pode ser vazio ou nulo!
-	 * @throws IllegalArgumentException, campo DNI nao pode ser vazio ou nulo!
-	 * @throws IllegalArgumentException, campo Estado nao pode ser vazio ou nulo!
-	 * @throws IllegalArgumentException, campo partido nao pode ser vazio ou nulo!
-	 * @throws IllegalArgumentException, campo DNI invalido!
-	 * @throws IllegalArgumentException, pessoa ja cadastrada!
+	 * @param partido, partido da pessoa
+	 * @throws IllegalArgumentException, campo nome nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo dni nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo Estado nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo dni invalido
+	 * @throws IllegalArgumentException, pessoa ja cadastrada
 	 */
 	public void cadastrarPessoa(String nome, String dni, String estado, String interesses, String partido) {
 		if (nome == null || nome.isEmpty()) {
@@ -128,21 +112,21 @@ public class CrudPessoa {
 	}
 	
 	/**
-	 * Cadastra um deputado a partir de sua DNI e a data de inicio de mandato se forem válidas
+	 * Cadastra um deputado no mapa de deputados a partir do seu dni e a data de inicio de mandato. 
+	 * Se estas forem válidas, nao nulas ou vazias.
+	 * 
 	 * @param dni, dni da pessoa
 	 * @param dataDeInicio, data de inicio do mandato 
-	 * @throws IllegalArgumentException, Campo dni nao pode ser vazio ou nulo
-	 * @throws IllegalArgumentException, Campo dni invalido
+	 * @throws IllegalArgumentException, campo dni nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo dni invalido
 	 * @throws IllegalArgumentException, pessoa nao encontrada
 	 * @throws IllegalArgumentException, data nao pode ser vazio ou nulo
 	 * @throws IllegalArgumentException, pessoa sem partido
 	 * @throws IllegalArgumentException, deputado ja existe
 	 */
-	
 	public void cadastrarDeputado(String dni, String dataDeInicio) {
-		
 		if (dni == null || dni.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: dni nao pode ser vazio ou nulo");
+			throw new IllegalArgumentException("Erro ao cadastrar deputado: dni nao pode ser vazio ou nulo");
 		} else if(!verificaDni(dni)) {
 			throw new IllegalArgumentException("Erro ao cadastrar deputado: dni invalido");
 		} else if(!this.mapPessoa.containsKey(dni)) {
@@ -153,21 +137,23 @@ public class CrudPessoa {
 			throw new IllegalArgumentException("Erro ao cadastrar deputado: pessoa sem partido");
 		} 
 		validaData(dataDeInicio);
-		if (mapaDeputados.containsKey(dni)) {
+		if (this.mapDeputados.containsKey(dni)) {
 			throw new IllegalArgumentException("Erro ao cadastrar deputado: deputado já existe");
 		} 
 		Deputado deputado = new Deputado(this.mapPessoa.get(dni), dataDeInicio);
-		this.mapaDeputados.put(dni, deputado);
-		
-		
+		this.mapDeputados.put(dni, deputado);
 	}
+	
 	/**
-	 * Valida a data 
+	 * Verifica se a data é valida.
+	 * 
 	 * @param dataDeInicio, data de inicio de mandato
-	 * @throws java.text.ParseException 
+	 * @throws IllegalArgumentException, data futura
+	 * @throws IllegalArgumentException, data invalida
 	 */
 	public void validaData(String dataDeInicio) {
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+		sdf.setLenient(false);
 		Date dataAtual = new Date();
 		try {
 			Date dataDeInicio2 = sdf.parse(dataDeInicio);
@@ -180,34 +166,29 @@ public class CrudPessoa {
 	}
 
 	/**
-	 * Exibe a Pessoa indicada pelo dni.
-	 * @param dni dni da pessoa cadastrada(identificacao)
-	 * @return  Dados da pessoa cadastrada no formato de String.
-	 * @throws IllegalArgumentException Erro ao exibir pessoa: dni invalido
-	 * @throws IllegalArgumentException Erro ao exibir pessoa: dni nao pode ser vazio ou nulo
-	 * @throws NullPointerException Erro ao exibir pessoa: pessoa nao encontrada
+	 * Retorna uma String representando a Pessoa com o dni passado como parametro.
+	 * Se este for valido, nao for nulo ou vazio, e estiver cadastrado no mapa.
+	 * A representação segue o formato para pessoa: "nome - dni (origen) - partido(se houver) 
+	 * - Interessses: interesse, ..., interesse"
+	 * A representação segue o formato para deputado: "POL: nome - dni (origen) - partido(se houver) - 
+	 * Interessses: interesse, ..., interesse - data de inicio - quantidade de leis"
+	 * 
+	 * @param dni, o dni da pessoa
+	 * @throws IllegalArgumentException, dni invalido
+	 * @throws IllegalArgumentException, dni nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, pessoa nao encontrada
+	 * @return uma String representando a Pessoa com o dni passado como parametro
 	 */
-	public String exibePessoa(String dni){
-		String saida = "";
-
-		if(!verificaDni(dni)){
-			throw new IllegalArgumentException("Erro ao exibir pessoa: dni invalido");
-		}
-
+	public String exibirPessoa(String dni){
 		if(dni == null || dni.isEmpty()){
 			throw new IllegalArgumentException("Erro ao exibir pessoa: dni nao pode ser vazio ou nulo");
+		}else if(!verificaDni(dni)){
+			throw new IllegalArgumentException("Erro ao exibir pessoa: dni invalido");
+		}else if(!this.mapPessoa.containsKey(dni)){
+			throw new IllegalArgumentException("Erro ao exibir pessoa: pessoa nao encontrada");
+		} else if (this.mapDeputados.containsKey(dni)){
+			return this.mapDeputados.get(dni).toString();
 		}
-		if(!mapPessoa.containsKey(dni)){
-			throw new NullPointerException("Erro ao exibir pessoa: pessoa nao encontrada");
-		}
-
-		if (mapaDeputados.containsKey(dni)){
-			saida += mapaDeputados.get(dni).toString();
-
-		}
-		else{
-			saida += mapPessoa.get(dni).toString();
-		}
-		return saida;
+		return this.mapPessoa.get(dni).toString();
 	}
 }
