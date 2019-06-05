@@ -20,7 +20,7 @@ public class ControlePessoa {
 	
 	/**
 	 * Mapa de Deputados.
-	 */
+	 
 	private HashMap<String, Deputado> mapDeputados;
 
 	/**
@@ -28,7 +28,7 @@ public class ControlePessoa {
 	 */
 	public ControlePessoa() {
 		this.mapPessoa = new HashMap<>();
-		this.mapDeputados = new HashMap<>();
+		//this.mapDeputados = new HashMap<>();
 	}
 	
 	/**
@@ -137,11 +137,7 @@ public class ControlePessoa {
 			throw new IllegalArgumentException("Erro ao cadastrar deputado: pessoa sem partido");
 		} 
 		validaData(dataDeInicio);
-		if (this.mapDeputados.containsKey(dni)) {
-			throw new IllegalArgumentException("Erro ao cadastrar deputado: deputado já existe");
-		} 
-		Deputado deputado = new Deputado(this.mapPessoa.get(dni), dataDeInicio);
-		this.mapDeputados.put(dni, deputado);
+		this.mapPessoa.get(dni).setFuncao(dataDeInicio);
 	}
 	
 	/**
@@ -186,9 +182,7 @@ public class ControlePessoa {
 			throw new IllegalArgumentException("Erro ao exibir pessoa: dni invalido");
 		}else if(!this.mapPessoa.containsKey(dni)){
 			throw new IllegalArgumentException("Erro ao exibir pessoa: pessoa nao encontrada");
-		} else if (this.mapDeputados.containsKey(dni)){
-			return this.mapDeputados.get(dni).toString();
-		}
+		} 
 		return this.mapPessoa.get(dni).toString();
 	}
 }

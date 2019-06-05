@@ -33,6 +33,11 @@ public class Pessoa {
 	private String interesses;
 	
 	/**
+	 * Cargo da pessoa.
+	 */
+	private Cargo funcao;
+	
+	/**
 	 * Constroi uma pessoa, a partir do seu nome, o documento nacional de identificacao, o estado de origem e
 	 * os interesses da pessoa.
 	 * 
@@ -110,7 +115,14 @@ public class Pessoa {
 	public String getInteresses() {
 		return interesses;
 	}
-	
+
+	/**
+	 * Seta uma String que representa os interesses da pessoa.
+	 */
+	public void setFuncao(String dataInicio) {
+		this.funcao= new Deputado(dataInicio);
+	}
+
 	/**
 	* Retorna a um inteiro referente uma representação númerica do objeto.
 	* 
@@ -151,17 +163,22 @@ public class Pessoa {
 	/**
 	 * Retorna a String que representa uma Pessoa.
 	 * A representação segue o formato: "nome - dni (origen) - partido(se houver) - Interessses: interesse, ..., interesse"
+	 * "POL: nome - dni (origen) - partido(se houver) - Interessses: interesse, ..., interesse - data de inicio do madato - x Leis" (se possuir funcao)
 	 * 
 	 * @return a representacao em String do nome, dni, origem, partido e interesses de uma Pessoa. 
 	 */
 	@Override
 	public String toString() {
 		String pessoa = this.nome + " - " + this.dni + " (" + this.origem + ")";
+		
 		if (this.partido != null) {
 			pessoa += " - " + this.partido;
 		}
 		if (this.interesses != null && this.interesses.length() > 0) {
 			pessoa += " - Interesses: " + this.interesses;
+		}
+		if (this.funcao != null) {
+			return pessoa = "POL: " + pessoa + " - " + this.funcao.getDataInicio().substring(0, 2) + "/" + this.funcao.getDataInicio().substring(2, 4) + "/" + this.funcao.getDataInicio().substring(4, 8) + " - " + this.funcao.getQtdLeis() + " Leis";
 		}
 		return pessoa;
 	}

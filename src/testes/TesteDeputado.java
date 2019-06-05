@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import projetoLP2.Deputado;
-import projetoLP2.Pessoa;
 
 class TesteDeputado {
 
@@ -16,11 +15,9 @@ class TesteDeputado {
 	
 	@BeforeEach
 	public void setUp() {
-		Pessoa p1 = new Pessoa("jose", "123456789-0", "PE", "saude,educacao,ensino", "UNB");
-		Pessoa p2 = new Pessoa("andre", "876412345-9", "BA", "ensino,educacao" ,"UNE");
-		d1 = new Deputado(p1, "01022019");
-		d2 = new Deputado(p2, "01012019");
-		d3 = new Deputado(p1, "02032019");
+		d1 = new Deputado("01022019");
+		d2 = new Deputado("01012019");
+		d3 = new Deputado("02032019");
 	}
 	
 	@Test
