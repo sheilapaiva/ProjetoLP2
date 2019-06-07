@@ -3,7 +3,10 @@ package projetoLP2;
 /**
  * Representacao de uma pessoa. Uma pessoa é representada por um nome, dni, origem, partido e interesses.
  * 
- * @author Andre Santana, Caio Arruda, João Vitor e Sheila Paiva
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
 public class Pessoa {
 	
@@ -25,7 +28,7 @@ public class Pessoa {
 	/**
 	 * Partido politico da pessoa.
 	 */
-	private String partido;
+	private Partido partido;
 	
 	/**
 	 * Interesses da pessoa.
@@ -63,7 +66,7 @@ public class Pessoa {
 	 * @param interesses, os interesses da pessoa
 	 * @param partido, o partido da pessoa
 	 */
-	public Pessoa(String nome, String dni, String origem, String interesses, String partido) {
+	public Pessoa(String nome, String dni, String origem, String interesses, Partido partido) {
 		this.nome = nome;
 		this.dni = dni;
 		this.origem = origem;
@@ -103,7 +106,7 @@ public class Pessoa {
 	 * 
 	 * @return uma String que representa o partido
 	 */
-	public String getPartido() {
+	public Partido getPartido() {
 		return partido;
 	}	
 	

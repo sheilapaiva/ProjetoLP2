@@ -5,20 +5,32 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import projetoLP2.Partido;
 import projetoLP2.Pessoa;
+
+/**
+ * Testes de Unidade da classe Pessoa.
+ * 
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
+ */
 
 class TestePessoa {
 	Pessoa p1;
 	Pessoa p2;
 	Pessoa p3;
 	Pessoa p4;
+	Partido partido;
 	
 	@BeforeEach
 	public void setUp() {
 		p1 = new Pessoa("jose", "123456789-0", "PE", "saude,educacao,ensino");
 		p2 = new Pessoa("jose", "123456789-0", "PE", "saude,educacao,ensino");
 		p3 = new Pessoa("maria", "987654321-0", "PB", "saude,ensino");
-		p4 = new Pessoa("andre", "876412345-9", "BA", "ensino,educacao" ,"UNE");
+		partido = new Partido("UNE");
+		p4 = new Pessoa("andre", "876412345-9", "BA", "ensino,educacao", partido);
 		
 	}
 	@Test

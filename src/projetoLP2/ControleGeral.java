@@ -3,7 +3,10 @@ package projetoLP2;
 /**
  * Representação de um Controle Geral. Gerencia o controle de pessoas e o controle de partidos.
  * 
- * @author Andre Santana, Caio Arruda, João Vitor e Sheila Paiva
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
 public class ControleGeral {
 	

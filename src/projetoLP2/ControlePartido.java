@@ -7,7 +7,10 @@ import java.util.Comparator;
 /**
  * Representação de um Controle de Partido, responsável por cadastrar uma partido e exibir as bases dos partidos.
  * 
- * @author Andre Santana, Caio Arruda, João Vitor e Sheila Paiva
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
 public class ControlePartido {
 	
@@ -15,6 +18,7 @@ public class ControlePartido {
 	 * ArrayList de partidos
 	 */
 	private ArrayList<Partido> partidos;
+	
 	/**
 	* Comparador de partido.
 	*/
@@ -52,7 +56,7 @@ public class ControlePartido {
 	public String exibirBase() {
 		String base = "";
 		int i = 0;
-		Collections.sort(this.partidos, this.comparador);
+		Collections.sort(this.partidos, comparador);
 		for (Partido p : this.partidos) {
 			if (i == 0) {
 				base += p.toString();
