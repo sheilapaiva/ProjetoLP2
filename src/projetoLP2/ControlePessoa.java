@@ -9,7 +9,10 @@ import java.util.HashMap;
 /**
  * Representação de um Controle de Pessoa, responsável por cadastrar uma pessoa, deputado ou listar pessoa.
  * 
- * @author Andre Santana, Caio Arruda, João Vitor e Sheila Paiva
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
 public class ControlePessoa {
 	
@@ -17,18 +20,12 @@ public class ControlePessoa {
 	 * Mapa de pessoas.
 	 */
 	private HashMap<String, Pessoa> mapPessoa;
-	
-	/**
-	 * Mapa de Deputados.
-	 
-	private HashMap<String, Deputado> mapDeputados;
 
 	/**
 	 * Constroi um controle de pessoas.
 	 */
 	public ControlePessoa() {
 		this.mapPessoa = new HashMap<>();
-		//this.mapDeputados = new HashMap<>();
 	}
 	
 	/**
@@ -107,7 +104,8 @@ public class ControlePessoa {
 		} else if (this.mapPessoa.containsKey(dni)) {
 			throw new IllegalArgumentException("Erro ao cadastrar pessoa: dni ja cadastrado");
 		}
-		Pessoa p = new Pessoa(nome, dni, estado, interesses, partido);
+		Partido novoPartido = new Partido(partido);
+		Pessoa p = new Pessoa(nome, dni, estado, interesses, novoPartido);
 		this.mapPessoa.put(dni, p);
 	}
 	

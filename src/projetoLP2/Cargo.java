@@ -1,14 +1,16 @@
 package projetoLP2;
 
 /**
- * Representa uma interface de uma funcao de pessoa. 
+ * Representa uma interface de um Cargo de pessoa. 
  * 
- * @author Andre Santana, Caio Arruda, João Vitor e Sheila Paiva
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
 public interface Cargo {
 	
 	public String getDataInicio();
 	
 	public int getQtdLeis();
-	
 }
