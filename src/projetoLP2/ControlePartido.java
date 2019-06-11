@@ -23,6 +23,7 @@ public class ControlePartido {
 	* Comparador de partido.
 	*/
 	private Comparator<Partido> comparador;
+	
 
 	/**
 	 * Constroi um controle de partidos.

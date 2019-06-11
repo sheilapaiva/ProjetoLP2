@@ -1,5 +1,8 @@
 package projetoLP2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Representação de um Controle Geral. Gerencia o controle de pessoas e o controle de partidos.
  * 
@@ -13,18 +16,23 @@ public class ControleGeral {
 	/**
 	 * Controle de pessoas.
 	 */
-	ControlePessoa cp;
+	private ControlePessoa cp;
 	/**
 	 * Controle de partidos.
 	 */
-	ControlePartido cpt;
+	private ControlePartido cpt;
+	/**
+	 * Constroi um mapa de comissoes.
+	 */
+	private HashMap <String, Comissao> mapComissao;
 	
 	/**
-	 * Constroi um controle geral.
+	 * Constroi um Controle Geral.
 	 */
 	public ControleGeral() {
 		this.cp = new ControlePessoa();
 		this.cpt = new ControlePartido();
+		this.mapComissao = new HashMap<>();
 	}
 
 	/**
@@ -91,5 +99,38 @@ public class ControleGeral {
 	 */
 	public String exibirBase() {
 		return cpt.exibirBase();
+	}
+	
+	private ArrayList<Pessoa> criaListaPoliticos(String politicos) {
+		ArrayList<Pessoa> lista = new ArrayList<>();
+		String[] dni = politicos.split(",");
+		for (String politico : dni) {
+			if (cp.getMapPessoa().containsKey(politico)) {
+				lista.add(cp.getMapPessoa().get(politico));
+			}
+		}
+		return lista;
+	}
+	
+	/**
+	 * FALTAM TRATAR EXCECOES!
+	 * Cadastra uma comissao no mapa de comissao. A partir do tema e da lista de politicos.
+	 * Se esses campos não estiverem nulos ou vazios e forem validos. Usa o tema como chave
+	 * para o mapa.
+	 * 
+	 * @param tema, tema da comissao
+	 * @param politicos, lista de politicos
+	 * @throws IllegalArgumentException, campo tema nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo lista de politicos nao pode ser vazio ou nulo
+	 * @throws IllegalArgumentException, campo dni invalido 
+	 */
+	public void cadastrarComissao(String tema, String politicos) {
+		if (tema == null || "".equals(tema.trim())) {
+			throw new IllegalArgumentException("Erro ao cadastrar comissao: tema nao pode ser vazio ou nulo");
+		} else if (politicos == null || "".equals(politicos.trim())) {
+			throw new IllegalArgumentException("Erro ao cadastrar comissao: lista de politicos nao pode ser vazio ou nulo");
+		}
+		Comissao comissao = new Comissao(tema, criaListaPoliticos(politicos));
+		this.mapComissao.put(tema, comissao);
 	}
 }

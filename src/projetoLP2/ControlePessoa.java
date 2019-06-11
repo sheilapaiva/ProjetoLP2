@@ -28,6 +28,10 @@ public class ControlePessoa {
 		this.mapPessoa = new HashMap<>();
 	}
 	
+	public HashMap<String, Pessoa> getMapPessoa() {
+		return mapPessoa;
+	}
+
 	/**
 	 * Retorne a um boolean, depois de verificar se o documento nacional de
 	 * identificacao possui os caracteres corretos, composto 

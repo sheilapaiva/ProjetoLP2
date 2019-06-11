@@ -83,8 +83,18 @@ public class Facade {
 		return cg.exibirBase();
 	}
 	
+	/**
+	 * Cadastra uma comissao no mapa de comissao. A partir do tema e da lista de politicos.
+	 * 
+	 * @param tema
+	 * @param politicos
+	 */
+	public void cadastrarComissao(String tema, String politicos) {
+		cg.cadastrarComissao(tema, politicos);
+	}
+	
 	public static void main(String[] args) {
-		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt"};
+		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt"};
 		EasyAccept.main(args);
 	}
 }
