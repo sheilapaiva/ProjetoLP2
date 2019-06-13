@@ -2,21 +2,45 @@ package projetoLP2;
 
 public abstract class Projetos {
 
-    protected Pessoa autor;
-    protected int ano;
-    protected String ementa;
-    protected String interesses;
-    protected String situacao = "EM VOTACAO (CCJ)";
-    protected String url;
+    private String dni;
+    private int ano;
+    private String ementa;
+    private String interesses;
+    private String situacao = "EM VOTACAO (CCJ)";
+    private String url;
 
-    public Projetos(Pessoa autor, int ano, String ementa, String interesses, String url) {
-        this.autor = autor;
+    public Projetos(String dni, int ano, String ementa, String interesses, String url) {
+        this.dni = dni;
         this.ano = ano;
         this.ementa = ementa;
         this.interesses = interesses;
         this.url = url;
     }
 
-    public abstract String getAno();
-    public abstract String toString();
+	public String getDni() {
+		return dni;
+	}
+
+	public int getAno() {
+		return ano;
+	}
+
+	public String getEmenta() {
+		return ementa;
+	}
+
+	public String getInteresses() {
+		return interesses;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+    
+    
+    
 }
