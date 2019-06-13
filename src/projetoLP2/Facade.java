@@ -93,6 +93,22 @@ public class Facade {
 		cg.cadastrarComissao(tema, politicos);
 	}
 	
+	public String cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
+		return cg.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
+	}
+	
+	public String cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		return cg.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
+	}
+	
+	public String cadastraPec(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		return cg.cadastrarPec(dni, ano, ementa, interesses, url, artigos);
+		
+	}
+	public String exibirProjeto(String codigo) {
+		return cg.exibirProjeto(codigo);
+		}
+	
 	public static void main(String[] args) {
 		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt"};
 		EasyAccept.main(args);

@@ -21,6 +21,8 @@ public class ControleGeral {
 	 * Controle de partidos.
 	 */
 	private ControlePartido cpt;
+	
+	private ControleProjetos cpl;
 	/**
 	 * Constroi um mapa de comissoes.
 	 */
@@ -32,6 +34,7 @@ public class ControleGeral {
 	public ControleGeral() {
 		this.cp = new ControlePessoa();
 		this.cpt = new ControlePartido();
+		this.cpl = new ControleProjetos();
 		this.mapComissao = new HashMap<>();
 	}
 
@@ -132,5 +135,22 @@ public class ControleGeral {
 		}
 		Comissao comissao = new Comissao(tema, criaListaPoliticos(politicos));
 		this.mapComissao.put(tema, comissao);
+	}
+	
+	public String cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
+		return this.cpl.cadastraPl(dni, ano, ementa, interesses, url, conclusivo);
+	}
+	
+	public String cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		return this.cpl.cadastraPLP(dni, ano, ementa, interesses, url, artigos);
+	}
+	
+	public String cadastrarPec(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		return this.cpl.cadastraPec(dni, ano, ementa, interesses, url, artigos);
+		
+	}
+	
+	public String exibirProjeto(String codigo) {
+		return this.cpl.exibirProjeto(codigo);
 	}
 }
