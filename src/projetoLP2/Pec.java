@@ -1,18 +1,26 @@
 package projetoLP2;
 
-public class Pec extends Projetos {
+public class Pec extends Projeto {
 	
 	private String artigos;
 
-	public Pec(String dni, int ano, String ementa, String interesses, String url, String artigos) {
-		super(dni, ano, ementa, interesses, url);
+	public Pec(String codigo, String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		super(codigo, dni, ano, ementa, interesses, url);
 		this.artigos = artigos;
 	}
 
-
 	@Override
 	public String toString() {
-		return " - " + getEmenta() + " - " + "-" + this.artigos + " - " + getSituacao();
+		String [] art = this.artigos.split(",");
+		String artigos = "";
+		for (int i = 0; i < art.length; i++) {
+			if (i == 0) {
+				artigos += art[i];
+			}else {
+				artigos += ", " + art[i];
+			}
+		}
+		return "Projeto de Emenda Constitucional - " + codigo + " - " + dni + " - " + ementa + " - " + artigos + " - " + situacao;
 	}
 
 }

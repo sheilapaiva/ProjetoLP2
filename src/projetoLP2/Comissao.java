@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Comissao {
 	
 	/**
-	 * tema da comissao
+	 * Tema da comissao
 	 */
 	private String tema;
 	
 	/**
-	 * lista de politicos
+	 * Lista de politicos
 	 */
-	private ArrayList<Pessoa> politicos;
+	private ArrayList<String> politicos;
 	
 	/**
 	 * Constroi uma comissao
@@ -20,12 +20,19 @@ public class Comissao {
 	 * @param tema
 	 * @param politicos
 	 */
-	public Comissao(String tema, ArrayList<Pessoa> politicos) {
+	public Comissao(String tema, ArrayList<String> politicos) {
 		this.tema = tema;
-		this.politicos = new ArrayList<>();
 		this.politicos.addAll(politicos);
 	}
 	
+	public String getTema() {
+		return tema;
+	}
+
+	public ArrayList<String> getPoliticos() {
+		return politicos;
+	}
+
 	/**
 	* Retorna a um inteiro referente uma representação númerica do objeto.
 	* 
@@ -62,5 +69,4 @@ public class Comissao {
 			return false;
 		return true;
 	}
-	
 }

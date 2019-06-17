@@ -119,6 +119,10 @@ public class Pessoa {
 		return interesses;
 	}
 
+	public Cargo getFuncao() {
+		return funcao;
+	}
+
 	/**
 	 * Seta uma String que representa os interesses da pessoa.
 	 */

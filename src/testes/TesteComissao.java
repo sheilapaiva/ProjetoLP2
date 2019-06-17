@@ -30,9 +30,9 @@ class TesteComissao {
 		Partido partido = new Partido("UNE");
 		Pessoa p1 = new Pessoa("andre", "876412345-9", "BA", "ensino,educacao", partido);
 		Pessoa p2 = new Pessoa("luis", "876412345-0", "BA", "ensino", partido);
-		ArrayList<Pessoa> listaPessoa = new ArrayList<>();
-		listaPessoa.add(p1);
-		listaPessoa.add(p2);
+		ArrayList<String> listaPessoa = new ArrayList<>();
+		listaPessoa.add(p1.getDni());
+		listaPessoa.add(p2.getDni());
 		c1 = new Comissao("CCJC", listaPessoa);
 		c2 = new Comissao("CFT", listaPessoa);
 		c3 = new Comissao("CCJC", listaPessoa);

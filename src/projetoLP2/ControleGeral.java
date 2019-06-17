@@ -1,7 +1,6 @@
 package projetoLP2;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Representação de um Controle Geral. Gerencia o controle de pessoas e o controle de partidos.
@@ -16,26 +15,28 @@ public class ControleGeral {
 	/**
 	 * Controle de pessoas.
 	 */
-	private ControlePessoa cp;
+	private ControlePessoa controlePessoa;
 	/**
 	 * Controle de partidos.
 	 */
-	private ControlePartido cpt;
-	
-	private ControleProjetos cpl;
+	private ControlePartido controlePartido;
 	/**
-	 * Constroi um mapa de comissoes.
+	 * Controle de comissoes.
 	 */
-	private HashMap <String, Comissao> mapComissao;
+	private ControleComissao controleComissao;
+	/**
+	 * Controle de projetos.
+	 */
+	private ControleProjeto controleProjeto;
 	
 	/**
 	 * Constroi um Controle Geral.
 	 */
 	public ControleGeral() {
-		this.cp = new ControlePessoa();
-		this.cpt = new ControlePartido();
-		this.cpl = new ControleProjetos();
-		this.mapComissao = new HashMap<>();
+		this.controlePessoa = new ControlePessoa();
+		this.controlePartido = new ControlePartido();
+		this.controleComissao = new ControleComissao();
+		this.controleProjeto = new ControleProjeto();
 	}
 
 	/**
@@ -48,7 +49,11 @@ public class ControleGeral {
 	 * @param interesses, interesses da pessoa
 	 */
 	public void cadastrarPessoa(String nome, String dni, String estado, String interesses) {
-		cp.cadastrarPessoa(nome, dni, estado, interesses);
+		Validacao.validarString(nome, "Erro ao cadastrar pessoa: nome nao pode ser vazio ou nulo");
+		Validacao.validarString(dni, "Erro ao cadastrar pessoa: dni nao pode ser vazio ou nulo");
+		Validacao.validarString(estado, "Erro ao cadastrar pessoa: estado nao pode ser vazio ou nulo");
+		Validacao.verificaDni(dni, "Erro ao cadastrar pessoa: dni invalido");
+		controlePessoa.cadastrarPessoa(nome, dni, estado, interesses);
 	}
 	
 	/**
@@ -62,7 +67,11 @@ public class ControleGeral {
 	 * @param partido, partido da pessoa
 	 */
 	public void cadastrarPessoa(String nome, String dni, String estado, String interesses, String partido) {
-		cp.cadastrarPessoa(nome, dni, estado, interesses, partido);
+		Validacao.validarString(nome, "Erro ao cadastrar pessoa: nome nao pode ser vazio ou nulo");
+		Validacao.validarString(dni, "Erro ao cadastrar pessoa: dni nao pode ser vazio ou nulo");
+		Validacao.validarString(estado, "Erro ao cadastrar pessoa: estado nao pode ser vazio ou nulo");
+		Validacao.verificaDni(dni, "Erro ao cadastrar pessoa: dni invalido");
+		this.controlePessoa.cadastrarPessoa(nome, dni, estado, interesses, partido);
 	}
 
 	/**
@@ -72,7 +81,9 @@ public class ControleGeral {
 	 * @param dataDeInicio, data de inicio do mandato 
 	 */
 	public void cadastrarDeputado(String dni, String dataDeInicio) {
-		cp.cadastrarDeputado(dni, dataDeInicio);
+		Validacao.validarString(dni, "Erro ao cadastrar deputado: dni nao pode ser vazio ou nulo");
+		Validacao.verificaDni(dni, "Erro ao cadastrar deputado: dni invalido");
+		this.controlePessoa.cadastrarDeputado(dni, dataDeInicio);
 	}
 	
 	/**
@@ -82,7 +93,9 @@ public class ControleGeral {
 	 * @return uma String representando a Pessoa com o dni passado como parametro
 	 */
 	public String exibirPessoa(String dni){
-		return cp.exibirPessoa(dni);
+		Validacao.validarString(dni, "Erro ao exibir pessoa: dni nao pode ser vazio ou nulo");
+		Validacao.verificaDni(dni, "Erro ao exibir pessoa: dni invalido");
+		return this.controlePessoa.exibirPessoa(dni);
 	}
 	
 	/**
@@ -91,7 +104,8 @@ public class ControleGeral {
 	 * @param nome, o nome do partido
 	 */
 	public void cadastrarPartido(String partido) {
-		cpt.cadastrarPartido(partido);
+		Validacao.validarString(partido, "Erro ao cadastrar partido: partido nao pode ser vazio ou nulo");
+		this.controlePartido.cadastrarPartido(partido);
 	}
 	
 	/**
@@ -101,18 +115,22 @@ public class ControleGeral {
 	 * @return uma String representando os partidos
 	 */
 	public String exibirBase() {
-		return cpt.exibirBase();
+		return this.controlePartido.exibirBase();
 	}
 	
-	private ArrayList<Pessoa> criaListaPoliticos(String politicos) {
-		ArrayList<Pessoa> lista = new ArrayList<>();
-		String[] dni = politicos.split(",");
-		for (String politico : dni) {
-			if (cp.getMapPessoa().containsKey(politico)) {
-				lista.add(cp.getMapPessoa().get(politico));
+	private ArrayList<String> criaListaPoliticos(String politicos) {
+		String[] lista = politicos.split(",");
+		ArrayList<String> listaDni = new ArrayList<String>();
+		for (String dni : lista) {
+			Validacao.verificaDni(dni, "Erro ao cadastrar comissao: dni invalido");
+			if (!controlePessoa.getMapPessoa().containsKey(dni)) {
+				throw new IllegalArgumentException("Erro ao cadastrar comissao: pessoa inexistente");
+			} else if (controlePessoa.getMapPessoa().get(dni).getFuncao() == null){
+				throw new IllegalArgumentException("Erro ao cadastrar comissao: pessoa nao eh deputado");
 			}
+			listaDni.add(dni);
 		}
-		return lista;
+		return listaDni;
 	}
 	
 	/**
@@ -128,29 +146,93 @@ public class ControleGeral {
 	 * @throws IllegalArgumentException, campo dni invalido 
 	 */
 	public void cadastrarComissao(String tema, String politicos) {
-		if (tema == null || "".equals(tema.trim())) {
-			throw new IllegalArgumentException("Erro ao cadastrar comissao: tema nao pode ser vazio ou nulo");
-		} else if (politicos == null || "".equals(politicos.trim())) {
-			throw new IllegalArgumentException("Erro ao cadastrar comissao: lista de politicos nao pode ser vazio ou nulo");
+		Validacao.validarString(tema, "Erro ao cadastrar comissao: tema nao pode ser vazio ou nulo");
+		Validacao.validarString(politicos, "Erro ao cadastrar comissao: lista de politicos nao pode ser vazio ou nulo");
+		if (this.controleComissao.getMapComissao().containsKey(tema)) {
+			throw new IllegalArgumentException("Erro ao cadastrar comissao: tema existente");
 		}
-		Comissao comissao = new Comissao(tema, criaListaPoliticos(politicos));
-		this.mapComissao.put(tema, comissao);
-	}
-	
-	public String cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
-		return this.cpl.cadastraPl(dni, ano, ementa, interesses, url, conclusivo);
-	}
-	
-	public String cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
-		return this.cpl.cadastraPLP(dni, ano, ementa, interesses, url, artigos);
-	}
-	
-	public String cadastrarPec(String dni, int ano, String ementa, String interesses, String url, String artigos) {
-		return this.cpl.cadastraPec(dni, ano, ementa, interesses, url, artigos);
 		
+		this.controleComissao.cadastrarComissao(tema, criaListaPoliticos(politicos));
+	}
+	
+	public void cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
+		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
+		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
+		Validacao.validarString(interesses, "Erro ao cadastrar projeto: interesse nao pode ser vazio ou nulo");
+		Validacao.validarString(url, "Erro ao cadastrar projeto: url nao pode ser vazio ou nulo");
+		Validacao.verificaDni(dni, "Erro ao cadastrar projeto: dni invalido");
+		if (!this.controlePessoa.getMapPessoa().containsKey(dni)) {
+			throw new IllegalArgumentException("Erro ao cadastrar projeto: pessoa inexistente");
+		} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao() == null){
+			throw new IllegalArgumentException("Erro ao cadastrar projeto: pessoa nao eh deputado");
+		}
+		Validacao.ValidaAno(ano);
+		
+		this.controleProjeto.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
+	}
+	
+	public void cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
+		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
+		Validacao.validarString(interesses, "Erro ao cadastrar projeto: interesse nao pode ser vazio ou nulo");
+		Validacao.validarString(url, "Erro ao cadastrar projeto: url nao pode ser vazio ou nulo");
+		Validacao.validarString(artigos, "Erro ao cadastrar projeto: artigo nao pode ser vazio ou nulo");
+		Validacao.verificaDni(dni, "Erro ao cadastrar projeto: dni invalido");
+		if (!this.controlePessoa.getMapPessoa().containsKey(dni)) {
+			throw new IllegalArgumentException("Erro ao cadastrar projeto: pessoa inexistente");
+		} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao() == null){
+			throw new IllegalArgumentException("Erro ao cadastrar projeto: pessoa nao eh deputado");
+		}
+		Validacao.ValidaAno(ano);
+		
+		this.controleProjeto.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
+	}
+	
+	public void cadastrarPEC(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
+		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
+		Validacao.validarString(interesses, "Erro ao cadastrar projeto: interesse nao pode ser vazio ou nulo");
+		Validacao.validarString(url, "Erro ao cadastrar projeto: url nao pode ser vazio ou nulo");
+		Validacao.validarString(artigos, "Erro ao cadastrar projeto: artigo nao pode ser vazio ou nulo");
+		Validacao.verificaDni(dni, "Erro ao cadastrar projeto: dni invalido");
+		if (!this.controlePessoa.getMapPessoa().containsKey(dni)) {
+			throw new IllegalArgumentException("Erro ao cadastrar projeto: pessoa inexistente");
+		} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao() == null){
+			throw new IllegalArgumentException("Erro ao cadastrar projeto: pessoa nao eh deputado");
+		}
+		Validacao.ValidaAno(ano);
+		this.controleProjeto.cadastrarPEC(dni, ano, ementa, interesses, url, artigos);
 	}
 	
 	public String exibirProjeto(String codigo) {
-		return this.cpl.exibirProjeto(codigo);
+		Validacao.validarString(codigo, "Erro ao exibir projeto: projeto nao pode ser vazio ou nulo");
+		if (!this.controleProjeto.mapProjetos.containsKey(codigo)) {
+			throw new IllegalArgumentException("Erro ao exibir projeto: projeto inexistente");
+		}
+		
+		return this.controleProjeto.exibirProjeto(codigo);
 	}
+	
+	public boolean votarComissao(String codigo, String statusGovernista, String proximoLocal) {
+		Validacao.validarString(codigo, "Erro ao votar proposta: codigo nao pode ser vazio ou nulo");
+		Validacao.validarString(statusGovernista, "Erro ao votar proposta: status governista nao pode ser vazio ou nulo");
+		Validacao.validarString(proximoLocal, "Erro ao votar proposta: proximo local nao pode ser vazio ou nulo");
+		
+		return true;
+	}
+	
+	public boolean votarPlenario(String codigo, String statusGovernista, String presentes) {
+		Validacao.validarString(codigo, "Erro ao votar proposta: codigo nao pode ser vazio ou nulo");
+		Validacao.validarString(statusGovernista, "Erro ao votar proposta: status governista nao pode ser vazio ou nulo");
+		Validacao.validarString(presentes, "Erro ao votar proposta: presentes nao pode ser vazio ou nulo");
+		
+		return true;
+	}
+	
+	public String exibirTramitacao(String codigo) {
+		Validacao.validarString(codigo, "Erro ao exibir tramitacao: codigo nao pode ser vazio ou nulo");
+
+		return "";
+	}
+	
 }
