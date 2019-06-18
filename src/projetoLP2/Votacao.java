@@ -49,7 +49,7 @@ public class Votacao {
 	}
 	
 	private boolean votacao(int afavor, int total) {
-		return afavor > total / 2;
+		return afavor > (total / 2);
 	}
 	
 	private boolean votacaoPEC(int afavor, int total) {

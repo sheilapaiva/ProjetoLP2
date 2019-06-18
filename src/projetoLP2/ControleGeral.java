@@ -228,17 +228,41 @@ public class ControleGeral {
 		return i;
 	}
 	
-	private verificaStatus(String codigo, String status) {
+	private int contagemInteresses(ArrayList<String> dni, String interesses) {
+		String[] lista = interesses.split(",");
+		ArrayList<String> interessesProj = new ArrayList<String>();
+		for (String interesse : lista) {
+			interessesProj.add(interesse);
+		}
+		
+		int contDep = 0;
+		for (int b = 0; b < dni.size(); b++) {
+			String [] interessesDep = this.controlePessoa.getMapPessoa().get(dni.get(b)).getInteresses().split(",");
+			for (int a = 0; a < interessesDep.length; a++) {
+				if (interessesProj.contains(interessesDep[a])) {
+					contDep++;
+					break;
+				}
+			}
+		}
+		return contDep;
+	}
+	
+	private boolean verificaStatus(String codigo, String status) {
 		Projeto p = this.controleProjeto.getMapProjetos().get(codigo);
 		Comissao c = this.controleComissao.getMapComissao().get(p.getNomeComissao());
-		int cont = contagemBase(c.getPoliticos());
+		int cont;
 		
 		if (status.equals("GOVERNISTA")) {
-			this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao());
+			cont = contagemBase(c.getPoliticos());
+			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		} else if (status.equals("OPOSICAO")) {
-			
-		} else {
-			
+			cont = c.getPoliticos().size() - contagemBase(c.getPoliticos());
+			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
+		} else {	
+			String interesses = p.getInteresses();
+			cont = contagemInteresses(c.getPoliticos(), interesses);
+			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		}
 	}
 	
@@ -251,11 +275,10 @@ public class ControleGeral {
 		} else if (!statusGovernista.equals("GOVERNISTA") || !statusGovernista.equals("OPOSICAO") || !statusGovernista.equals("LIVRE")) {
 			throw new IllegalArgumentException("Erro ao votar proposta: status invalido");
 		}
-		
-		
-		
-		
-		return true;
+		boolean v = verificaStatus(codigo, statusGovernista);
+		this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("(" + proximoLocal + ")");
+		return v;
+	
 	}
 	
 	public boolean votarPlenario(String codigo, String statusGovernista, String presentes) {

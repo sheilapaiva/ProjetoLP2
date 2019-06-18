@@ -24,6 +24,18 @@ public abstract class Projeto {
 
     
     
+	public String getInteresses() {
+		return interesses;
+	}
+
+
+
+	public void setInteresses(String interesses) {
+		this.interesses = interesses;
+	}
+
+
+
 	public String getSituacao() {
 		return situacao;
 	}
