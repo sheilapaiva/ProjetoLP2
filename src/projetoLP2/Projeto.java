@@ -23,40 +23,29 @@ public abstract class Projeto {
     }
 
     
-    
 	public String getInteresses() {
 		return interesses;
 	}
 
-
-
 	public void setInteresses(String interesses) {
 		this.interesses = interesses;
 	}
-
-
-
+	
 	public String getSituacao() {
 		return situacao;
 	}
-
-
 
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
 
-
-
 	public String getNomeComissao() {
-		return nomeComissao;
+		return nomeComissao.substring(1, nomeComissao.length() - 1);
 	}
 
 	public void setNomeComissao(String nomeComissao) {
-		this.nomeComissao = nomeComissao;
+		this.nomeComissao = "(" + nomeComissao + ")";
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -94,7 +83,5 @@ public abstract class Projeto {
 			return false;
 		return true;
 	}
-       
-	
 	
 }

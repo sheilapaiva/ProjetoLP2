@@ -93,16 +93,16 @@ public class Facade {
 		controleGeral.cadastrarComissao(tema, politicos);
 	}
 	
-	public void cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
-		controleGeral.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
+	public String cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
+		return controleGeral.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
 	}
 	
-	public void cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
-		controleGeral.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
+	public String cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		return controleGeral.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
 	}
 	
-	public void cadastrarPEC(String dni, int ano, String ementa, String interesses, String url, String artigos) {
-		controleGeral.cadastrarPEC(dni, ano, ementa, interesses, url, artigos);
+	public String cadastrarPEC(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		return controleGeral.cadastrarPEC(dni, ano, ementa, interesses, url, artigos);
 		
 	}
 	
@@ -111,11 +111,11 @@ public class Facade {
 	}
 	
 	public boolean votarComissao(String codigo, String statusGovernista, String proximoLocal) {
-		return true;
+		return controleGeral.votarComissao(codigo, statusGovernista, proximoLocal);
 	}
 	
 	public boolean votarPlenario(String codigo, String statusGovernista, String presentes) {
-		return true;
+		return controleGeral.votarPlenario(codigo, statusGovernista, presentes);
 	}
 	
 	public String exibirTramitacao(String codigo) {
@@ -123,7 +123,8 @@ public class Facade {
 	}
 	
 	public static void main(String[] args) {
-		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt", "testes-eco/use_case_6.txt", "testes-eco/use_case_7.txt"};
+		//"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt", "testes-eco/use_case_6.txt", 
+		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_7.txt"};
 		EasyAccept.main(args);
 	}
 }

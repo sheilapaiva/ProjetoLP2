@@ -160,7 +160,7 @@ public class ControleGeral {
 		this.controleComissao.cadastrarComissao(tema, criaListaPoliticos(politicos));
 	}
 	
-	public void cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
+	public String cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
 		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
 		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
 		Validacao.validarString(interesses, "Erro ao cadastrar projeto: interesse nao pode ser vazio ou nulo");
@@ -173,10 +173,10 @@ public class ControleGeral {
 		}
 		Validacao.ValidaAno(ano);
 		
-		this.controleProjeto.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
+		return this.controleProjeto.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
 	}
 	
-	public void cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+	public String cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
 		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
 		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
 		Validacao.validarString(interesses, "Erro ao cadastrar projeto: interesse nao pode ser vazio ou nulo");
@@ -190,10 +190,10 @@ public class ControleGeral {
 		}
 		Validacao.ValidaAno(ano);
 		
-		this.controleProjeto.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
+		return this.controleProjeto.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
 	}
 	
-	public void cadastrarPEC(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+	public String cadastrarPEC(String dni, int ano, String ementa, String interesses, String url, String artigos) {
 		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
 		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
 		Validacao.validarString(interesses, "Erro ao cadastrar projeto: interesse nao pode ser vazio ou nulo");
@@ -206,7 +206,7 @@ public class ControleGeral {
 			throw new IllegalArgumentException("Erro ao cadastrar projeto: pessoa nao eh deputado");
 		}
 		Validacao.ValidaAno(ano);
-		this.controleProjeto.cadastrarPEC(dni, ano, ementa, interesses, url, artigos);
+		return this.controleProjeto.cadastrarPEC(dni, ano, ementa, interesses, url, artigos);
 	}
 	
 	public String exibirProjeto(String codigo) {
@@ -251,17 +251,29 @@ public class ControleGeral {
 	private boolean verificaStatus(String codigo, String status) {
 		Projeto p = this.controleProjeto.getMapProjetos().get(codigo);
 		Comissao c = this.controleComissao.getMapComissao().get(p.getNomeComissao());
+		if (c == null) {
+			throw new IllegalArgumentException("Erro ao votar proposta: " + p.getNomeComissao() + " nao cadastrada");
+		}
+	
 		int cont;
 		
 		if (status.equals("GOVERNISTA")) {
+			
 			cont = contagemBase(c.getPoliticos());
+			System.out.println(cont);
+			System.out.println(c.getPoliticos().size());
 			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		} else if (status.equals("OPOSICAO")) {
+			
 			cont = c.getPoliticos().size() - contagemBase(c.getPoliticos());
+			System.out.println(cont);
+			System.out.println(c.getPoliticos().size());
 			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		} else {	
 			String interesses = p.getInteresses();
 			cont = contagemInteresses(c.getPoliticos(), interesses);
+			System.out.println(cont);
+			System.out.println(c.getPoliticos().size());
 			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		}
 	}
@@ -269,22 +281,63 @@ public class ControleGeral {
 	public boolean votarComissao(String codigo, String statusGovernista, String proximoLocal) {
 		Validacao.validarString(codigo, "Erro ao votar proposta: codigo nao pode ser vazio ou nulo");
 		Validacao.validarString(statusGovernista, "Erro ao votar proposta: status governista nao pode ser vazio ou nulo");
-		Validacao.validarString(proximoLocal, "Erro ao votar proposta: proximo local nao pode ser vazio ou nulo");
-		if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
-			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
-		} else if (!statusGovernista.equals("GOVERNISTA") || !statusGovernista.equals("OPOSICAO") || !statusGovernista.equals("LIVRE")) {
+		Validacao.validarString(proximoLocal, "Erro ao votar proposta: proximo local vazio");
+		if (!statusGovernista.equals("GOVERNISTA") && !statusGovernista.equals("OPOSICAO") && !statusGovernista.equals("LIVRE")) {
 			throw new IllegalArgumentException("Erro ao votar proposta: status invalido");
+		} else if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
+			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
 		}
 		boolean v = verificaStatus(codigo, statusGovernista);
-		this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("(" + proximoLocal + ")");
+		this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(proximoLocal);
 		return v;
 	
+	}
+	
+	private boolean verificaStatusPlenaria(String codigo, String status) {
+		Projeto p = this.controleProjeto.getMapProjetos().get(codigo);
+		Comissao c = this.controleComissao.getMapComissao().get(p.getNomeComissao());
+		if (c == null) {
+			throw new IllegalArgumentException("Erro ao votar proposta: " + p.getNomeComissao() + " nao cadastrada");
+		}
+	
+		int cont;
+		
+		if (status.equals("GOVERNISTA")) {
+			
+			cont = contagemBase(c.getPoliticos());
+			System.out.println(cont);
+			System.out.println(c.getPoliticos().size());
+			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
+		} else if (status.equals("OPOSICAO")) {
+			
+			cont = c.getPoliticos().size() - contagemBase(c.getPoliticos());
+			System.out.println(cont);
+			System.out.println(c.getPoliticos().size());
+			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
+		} else {	
+			String interesses = p.getInteresses();
+			cont = contagemInteresses(c.getPoliticos(), interesses);
+			System.out.println(cont);
+			System.out.println(c.getPoliticos().size());
+			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
+		}
 	}
 	
 	public boolean votarPlenario(String codigo, String statusGovernista, String presentes) {
 		Validacao.validarString(codigo, "Erro ao votar proposta: codigo nao pode ser vazio ou nulo");
 		Validacao.validarString(statusGovernista, "Erro ao votar proposta: status governista nao pode ser vazio ou nulo");
 		Validacao.validarString(presentes, "Erro ao votar proposta: presentes nao pode ser vazio ou nulo");
+		if (!statusGovernista.equals("GOVERNISTA") && !statusGovernista.equals("OPOSICAO") && !statusGovernista.equals("LIVRE")) {
+			throw new IllegalArgumentException("Erro ao votar proposta: status invalido");
+		} else if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
+			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
+		}
+		
+		boolean v = verificaStatusPlenaria(codigo, statusGovernista);
+
+		return v;
+		
+		
 		
 		return true;
 	}

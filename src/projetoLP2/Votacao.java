@@ -49,11 +49,15 @@ public class Votacao {
 	}
 	
 	private boolean votacao(int afavor, int total) {
-		return afavor > (total / 2);
+		System.out.println(Math.ceil((total / 2)));
+		System.out.println(afavor);
+		return afavor > Math.ceil((total / 2));
 	}
 	
 	private boolean votacaoPEC(int afavor, int total) {
-		return afavor > ((total / 5) * 3);
+		System.out.println(Math.ceil((total / 2)));
+		System.out.println(afavor);
+		return afavor > Math.ceil(((total / 5) * 3));
 	}
 	
 }

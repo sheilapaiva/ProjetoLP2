@@ -22,6 +22,7 @@ public class Comissao {
 	 */
 	public Comissao(String tema, ArrayList<String> politicos) {
 		this.tema = tema;
+		this.politicos = new ArrayList<>();
 		this.politicos.addAll(politicos);
 	}
 	
