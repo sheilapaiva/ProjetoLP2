@@ -292,7 +292,7 @@ public class ControleGeral {
 	public String exibirTramitacao(String codigo) {
 		Validacao.validarString(codigo, "Erro ao exibir tramitacao: codigo nao pode ser vazio ou nulo");
 
-		return "";
+		return "mmm";
 	}
 	
 }
