@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 public class ControleProjeto {
 
-	public HashMap<String, Projeto> mapProjetos;
+	private HashMap<String, Projeto> mapProjetos;
 	
-	public int numProjetoPlp;
+	private int numProjetoPlp;
 	
-	public int numProjetoPl;
+	private int numProjetoPl;
 	
-	public int numProjetoPec;
+	private int numProjetoPec;
 
 	public ControleProjeto() {
 		this.mapProjetos = new HashMap<>();
@@ -18,6 +18,14 @@ public class ControleProjeto {
 		this.numProjetoPl = 0;
 		this.numProjetoPec = 0;
 	}
+	
+	
+
+	public HashMap<String, Projeto> getMapProjetos() {
+		return mapProjetos;
+	}
+
+
 
 	public void cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
 		this.numProjetoPl ++;

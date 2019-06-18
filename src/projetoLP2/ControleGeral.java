@@ -28,6 +28,10 @@ public class ControleGeral {
 	 * Controle de projetos.
 	 */
 	private ControleProjeto controleProjeto;
+	/**
+	 * Controle de Votacao.
+	 */
+	private ControleVotacao controleVotacao;
 	
 	/**
 	 * Constroi um Controle Geral.
@@ -37,6 +41,7 @@ public class ControleGeral {
 		this.controlePartido = new ControlePartido();
 		this.controleComissao = new ControleComissao();
 		this.controleProjeto = new ControleProjeto();
+		this.controleVotacao = new ControleVotacao();
 	}
 
 	/**
@@ -206,17 +211,49 @@ public class ControleGeral {
 	
 	public String exibirProjeto(String codigo) {
 		Validacao.validarString(codigo, "Erro ao exibir projeto: projeto nao pode ser vazio ou nulo");
-		if (!this.controleProjeto.mapProjetos.containsKey(codigo)) {
+		if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
 			throw new IllegalArgumentException("Erro ao exibir projeto: projeto inexistente");
 		}
 		
 		return this.controleProjeto.exibirProjeto(codigo);
 	}
 	
+	private int contagemBase(ArrayList<String> dni) {
+		int i = 0;
+		for (int b = 0; b < dni.size(); b++) {
+			if (this.controlePartido.getPartidos().contains(this.controlePessoa.getMapPessoa().get(dni.get(b)).getPartido())) {
+				i++;
+			}
+		}
+		return i;
+	}
+	
+	private verificaStatus(String codigo, String status) {
+		Projeto p = this.controleProjeto.getMapProjetos().get(codigo);
+		Comissao c = this.controleComissao.getMapComissao().get(p.getNomeComissao());
+		int cont = contagemBase(c.getPoliticos());
+		
+		if (status.equals("GOVERNISTA")) {
+			this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao());
+		} else if (status.equals("OPOSICAO")) {
+			
+		} else {
+			
+		}
+	}
+	
 	public boolean votarComissao(String codigo, String statusGovernista, String proximoLocal) {
 		Validacao.validarString(codigo, "Erro ao votar proposta: codigo nao pode ser vazio ou nulo");
 		Validacao.validarString(statusGovernista, "Erro ao votar proposta: status governista nao pode ser vazio ou nulo");
 		Validacao.validarString(proximoLocal, "Erro ao votar proposta: proximo local nao pode ser vazio ou nulo");
+		if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
+			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
+		} else if (!statusGovernista.equals("GOVERNISTA") || !statusGovernista.equals("OPOSICAO") || !statusGovernista.equals("LIVRE")) {
+			throw new IllegalArgumentException("Erro ao votar proposta: status invalido");
+		}
+		
+		
+		
 		
 		return true;
 	}

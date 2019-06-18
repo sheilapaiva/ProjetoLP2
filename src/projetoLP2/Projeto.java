@@ -8,6 +8,7 @@ public abstract class Projeto {
     protected String ementa;
     protected String interesses;
     protected String situacao;
+    protected String nomeComissao;
     protected String url;
 
     public Projeto(String codigo, String dni, int ano, String ementa, String interesses, String url) {
@@ -16,9 +17,34 @@ public abstract class Projeto {
         this.ano = ano;
         this.ementa = ementa;
         this.interesses = interesses;
-        this.situacao = "EM VOTACAO (CCJC)";
+        this.situacao = "EM VOTACAO";
+        this.nomeComissao = "(CCJC)";
         this.url = url;
     }
+
+    
+    
+	public String getSituacao() {
+		return situacao;
+	}
+
+
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+
+
+	public String getNomeComissao() {
+		return nomeComissao;
+	}
+
+	public void setNomeComissao(String nomeComissao) {
+		this.nomeComissao = nomeComissao;
+	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -56,5 +82,7 @@ public abstract class Projeto {
 			return false;
 		return true;
 	}
-        
+       
+	
+	
 }
