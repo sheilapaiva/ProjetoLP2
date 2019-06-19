@@ -254,17 +254,13 @@ public class ControleGeral {
 		if (c == null) {
 			throw new IllegalArgumentException("Erro ao votar proposta: " + p.getNomeComissao() + " nao cadastrada");
 		}
-	
 		int cont;
-		
 		if (status.equals("GOVERNISTA")) {
-			
 			cont = contagemBase(c.getPoliticos());
 			System.out.println(cont);
 			System.out.println(c.getPoliticos().size());
 			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		} else if (status.equals("OPOSICAO")) {
-			
 			cont = c.getPoliticos().size() - contagemBase(c.getPoliticos());
 			System.out.println(cont);
 			System.out.println(c.getPoliticos().size());
@@ -286,11 +282,20 @@ public class ControleGeral {
 			throw new IllegalArgumentException("Erro ao votar proposta: status invalido");
 		} else if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
 			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
+		}else if (!this.controleProjeto.getMapProjetos().get(codigo).getSituacao().equals("EM VOTACAO")) {
+			throw new IllegalArgumentException("Erro ao votar proposta: tramitacao encerrada");
 		}
 		boolean v = verificaStatus(codigo, statusGovernista);
-		this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(proximoLocal);
-		return v;
-	
+		if (v) {
+			if (proximoLocal.equals("-")) {
+				this.controleProjeto.getMapProjetos().get(codigo).setSituacao("APROVADA");
+			}
+			this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(proximoLocal);
+		}else {
+			this.controleProjeto.getMapProjetos().get(codigo).setSituacao("ARQUIVADO");
+			this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(null);
+		}
+		return v;	
 	}
 	
 	private boolean verificaStatusPlenaria(String codigo, String status) {
@@ -331,15 +336,13 @@ public class ControleGeral {
 			throw new IllegalArgumentException("Erro ao votar proposta: status invalido");
 		} else if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
 			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
+		} else if (this.controleProjeto.getMapProjetos().get(codigo).getSituacao().equals("EM VOTACAO")) {
+			throw new IllegalArgumentException("Erro ao votar proposta: tramitacao em comissao");
 		}
 		
 		boolean v = verificaStatusPlenaria(codigo, statusGovernista);
 
 		return v;
-		
-		
-		
-		return true;
 	}
 	
 	public String exibirTramitacao(String codigo) {

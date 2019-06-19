@@ -44,7 +44,11 @@ public abstract class Projeto {
 	}
 
 	public void setNomeComissao(String nomeComissao) {
-		this.nomeComissao = "(" + nomeComissao + ")";
+		if (nomeComissao != null) {
+			this.nomeComissao = "(" + nomeComissao + ")";
+		} else {
+			this.nomeComissao = null;
+		}
 	}
 
 	@Override

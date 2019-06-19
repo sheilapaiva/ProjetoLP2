@@ -20,7 +20,12 @@ public class Pec extends Projeto {
 				artigos += ", " + art[i];
 			}
 		}
-		return "Projeto de Emenda Constitucional - " + codigo + " - " + dni + " - " + ementa + " - " + artigos + " - " + situacao + " " + nomeComissao;
+		if (nomeComissao != null) {
+			return "Projeto de Emenda Constitucional - " + codigo + " - " + dni + " - " + ementa + " - " + artigos + " - " + situacao + " " + nomeComissao;
+		} else {
+			return "Projeto de Emenda Constitucional - " + codigo + " - " + dni + " - " + ementa + " - " + artigos + " - " + situacao;
+
+		}
 	}
 
 }

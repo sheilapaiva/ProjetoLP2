@@ -29,8 +29,10 @@ public class Votacao {
 	
 	public boolean realizaVotacao(int afavor, int total, String tipo) {
 		boolean b;
-		if (tipo.equals("PEC")) {
-			b = votacaoPEC(afavor, total);
+		if (tipo.equals("COMISSAO")) {
+			b = votacao(afavor, total);
+		}else if (tipo.equals("PEC")) {
+			b = votacaoPECPlenario(afavor, total);
 		} else {
 			b = votacao(afavor, total);
 		}
@@ -54,7 +56,7 @@ public class Votacao {
 		return afavor > Math.ceil((total / 2));
 	}
 	
-	private boolean votacaoPEC(int afavor, int total) {
+	private boolean votacaoPECPlenario(int afavor, int total) {
 		System.out.println(Math.ceil((total / 2)));
 		System.out.println(afavor);
 		return afavor > Math.ceil(((total / 5) * 3));

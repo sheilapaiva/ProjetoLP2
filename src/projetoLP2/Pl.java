@@ -11,10 +11,15 @@ public class Pl extends Projeto {
 
     @Override
     public String toString() {
-    	if (this.conclusivo == true) {
-    		return "Projeto de Lei - " + codigo + " - " + dni + " - " + ementa + " - Conclusiva - " + situacao + " " + nomeComissao;
+    	String mensagem;
+    	if (this.conclusivo == true && nomeComissao != null) {
+    		mensagem = "Projeto de Lei - " + codigo + " - " + dni + " - " + ementa + " - Conclusiva - " + situacao + " " + nomeComissao;
+    	}else if (nomeComissao == null) {
+    		mensagem = "Projeto de Lei - " + codigo + " - " + dni + " - " + ementa + " - Conclusiva - " + situacao;
+    	}else {
+    		mensagem = "Projeto de Lei - " + codigo + " - " + dni + " - " + ementa + " - " + situacao + " " + nomeComissao;
     	}
-    	return "Projeto de Lei - " + codigo + " - " + dni + " - " + ementa + " - " + situacao + " " + nomeComissao;
+    	return mensagem;
     }
 
 }
