@@ -11,7 +11,13 @@ public class Plp extends Projeto {
 
     @Override
     public String toString() {
-		return "Projeto de Lei Complementar - " + codigo + " - " + dni + " - " + ementa + " - " + this.artigos + " - "+ situacao + " " + nomeComissao;
+    	String mensagem;
+    	if (nomeComissao == null) {
+    		mensagem = "Projeto de Lei Complementar - " + codigo + " - " + dni + " - " + ementa + " - " + this.artigos + " - "+ situacao;
+    	} else {
+    		mensagem = "Projeto de Lei Complementar - " + codigo + " - " + dni + " - " + ementa + " - " + this.artigos + " - "+ situacao + " " + nomeComissao;
+    	}
+		return mensagem;
     }
     
 }

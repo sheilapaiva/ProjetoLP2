@@ -257,19 +257,13 @@ public class ControleGeral {
 		int cont;
 		if (status.equals("GOVERNISTA")) {
 			cont = contagemBase(c.getPoliticos());
-			System.out.println(cont);
-			System.out.println(c.getPoliticos().size());
 			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		} else if (status.equals("OPOSICAO")) {
 			cont = c.getPoliticos().size() - contagemBase(c.getPoliticos());
-			System.out.println(cont);
-			System.out.println(c.getPoliticos().size());
 			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		} else {	
 			String interesses = p.getInteresses();
 			cont = contagemInteresses(c.getPoliticos(), interesses);
-			System.out.println(cont);
-			System.out.println(c.getPoliticos().size());
 			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
 		}
 	}
@@ -298,34 +292,52 @@ public class ControleGeral {
 		return v;	
 	}
 	
-	private boolean verificaStatusPlenaria(String codigo, String status) {
-		Projeto p = this.controleProjeto.getMapProjetos().get(codigo);
-		Comissao c = this.controleComissao.getMapComissao().get(p.getNomeComissao());
-		if (c == null) {
-			throw new IllegalArgumentException("Erro ao votar proposta: " + p.getNomeComissao() + " nao cadastrada");
+	private ArrayList<String> criaArrayDni(String politicos){
+		String[] lista = politicos.split(",");
+		ArrayList<String> listaDni = new ArrayList<String>();
+		for (String dni : lista) {
+			listaDni.add(dni);
 		}
+		return listaDni;
+	}
 	
+	private boolean verificaStatusPlenaria(String codigo, String status, String presentes) {
+		Projeto p = this.controleProjeto.getMapProjetos().get(codigo);
+		ArrayList<String> listaDni = new ArrayList<String>();
+		listaDni.addAll(criaArrayDni(presentes));
 		int cont;
+		boolean retorno = true;
 		
-		if (status.equals("GOVERNISTA")) {
-			
-			cont = contagemBase(c.getPoliticos());
-			System.out.println(cont);
-			System.out.println(c.getPoliticos().size());
-			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
-		} else if (status.equals("OPOSICAO")) {
-			
-			cont = c.getPoliticos().size() - contagemBase(c.getPoliticos());
-			System.out.println(cont);
-			System.out.println(c.getPoliticos().size());
-			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
+		if (status.equals("GOVERNISTA")) {	
+			cont = contagemBase(listaDni);
+			if (p.getCodigo().substring(0,2).equals("PEC")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PEC");
+			} else if (p.getCodigo().substring(0,2).equals("PLP")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PLP");
+			} else if (p.getCodigo().substring(0,2).equals("PL")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PL");
+			}
+		} else if (status.equals("OPOSICAO")) {	
+			cont = listaDni.size() - contagemBase(listaDni);
+			if (p.getCodigo().substring(0,2).equals("PEC")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PEC");
+			} else if (p.getCodigo().substring(0,2).equals("PLP")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PLP");
+			} else if (p.getCodigo().substring(0,2).equals("PL")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PL");
+			}
 		} else {	
 			String interesses = p.getInteresses();
-			cont = contagemInteresses(c.getPoliticos(), interesses);
-			System.out.println(cont);
-			System.out.println(c.getPoliticos().size());
-			return this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, c.getPoliticos().size(), "COMISSAO");
+			cont = contagemInteresses(listaDni, interesses);
+			if (p.getCodigo().substring(0,2).equals("PEC")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PEC");
+			} else if (p.getCodigo().substring(0,2).equals("PLP")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PLP");
+			} else if (p.getCodigo().substring(0,2).equals("PL")) {
+				retorno = this.controleVotacao.realizarVotacao(codigo, p.getNomeComissao(), cont, listaDni.size(), "PL");
+			}
 		}
+		return retorno;
 	}
 	
 	public boolean votarPlenario(String codigo, String statusGovernista, String presentes) {
@@ -340,14 +352,13 @@ public class ControleGeral {
 			throw new IllegalArgumentException("Erro ao votar proposta: tramitacao em comissao");
 		}
 		
-		boolean v = verificaStatusPlenaria(codigo, statusGovernista);
+		boolean v = verificaStatusPlenaria(codigo, statusGovernista, presentes);
 
 		return v;
 	}
 	
 	public String exibirTramitacao(String codigo) {
 		Validacao.validarString(codigo, "Erro ao exibir tramitacao: codigo nao pode ser vazio ou nulo");
-
 		return "mmm";
 	}
 	
