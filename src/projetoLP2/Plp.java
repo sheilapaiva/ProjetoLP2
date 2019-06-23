@@ -12,10 +12,10 @@ public class Plp extends Projeto {
     @Override
     public String toString() {
     	String mensagem;
-    	if (nomeComissao == null) {
-    		mensagem = "Projeto de Lei Complementar - " + codigo + " - " + dni + " - " + ementa + " - " + this.artigos + " - "+ situacao;
+    	if (nomeComissao.equals("-")) {
+    		mensagem = "Projeto de Lei Complementar - " + codigo + " - " + dni + " - " + ementa + " - " + this.artigos + " - " + situacao;
     	} else {
-    		mensagem = "Projeto de Lei Complementar - " + codigo + " - " + dni + " - " + ementa + " - " + this.artigos + " - "+ situacao + " " + nomeComissao;
+    		mensagem = "Projeto de Lei Complementar - " + codigo + " - " + dni + " - " + ementa + " - " + this.artigos + " - " + situacao + " (" + nomeComissao + ")";
     	}
 		return mensagem;
     }

@@ -16,6 +16,18 @@ public class Facade {
 	 * Controle geral.
 	 */
 	ControleGeral controleGeral = new ControleGeral();
+	
+	public void carregarSistema() {
+		controleGeral.carregarSistema();
+	}
+	
+	public void limparSistema() {
+		controleGeral.limparSistema();
+	}
+	
+	public void salvarSistema() {
+		controleGeral.salvarSistema();
+	}
 
 	/**
 	 * Cadastra uma pessoa no mapa de pessoa. A partir do nome, identificador, estado e interesses
@@ -119,11 +131,19 @@ public class Facade {
 	}
 	
 	public String exibirTramitacao(String codigo) {
-		return "";
+		return controleGeral.exibirTramitacao(codigo);
+	}
+	
+	public void configurarEstrategiaPropostaRelacionada(String dni, String estrategia) {
+		controleGeral.configurarEstrategiaPropostaRelacionada(dni, estrategia);
+	}
+	
+	public String pegarPropostaRelacionada(String dni) {
+		return controleGeral.pegarPropostaRelacionada(dni);
 	}
 	
 	public static void main(String[] args) {
-		//"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt", "testes-eco/use_case_6.txt", 
+		//args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt", "testes-eco/use_case_6.txt"}; 
 		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_7.txt"};
 		EasyAccept.main(args);
 	}

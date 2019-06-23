@@ -6,9 +6,9 @@ public class Votacao {
 	
 	private String local;
 
-	public Votacao(String local) {
+	public Votacao() {
 		this.status = "";
-		this.local = local;
+		this.local = "";
 	}
 
 	public String getStatus() {
@@ -24,7 +24,7 @@ public class Votacao {
 	}
 
 	public void setLocal(String local) {
-		this.local = local;
+		this.local = "(" + local + ")";
 	}
 	
 	public boolean realizaVotacao(int afavor, int total, String tipo) {
@@ -51,15 +51,17 @@ public class Votacao {
 	}
 	
 	private boolean votacao(int afavor, int total) {
-		System.out.println(Math.ceil((total / 2)));
-		System.out.println(afavor);
 		return afavor > Math.ceil((total / 2));
 	}
 	
 	private boolean votacaoPECPlenario(int afavor, int total) {
-		System.out.println(Math.ceil((total / 2)));
-		System.out.println(afavor);
 		return afavor > Math.ceil(((total / 5) * 3));
 	}
+
+	@Override
+	public String toString() {
+		return this.status + " " + this.local;
+	}
+	
 	
 }

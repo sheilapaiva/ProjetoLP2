@@ -17,13 +17,32 @@ public class ControleVotacao {
 		if (!this.mapVotacao.containsKey(codigo)) {
 			this.mapVotacao.put(codigo, new ArrayList<>());
 		}
+		boolean b;
+		Votacao v = new Votacao();
+		if (v.realizaVotacao(afavor, total, tipo)) {
+			v.setLocal(local);
+			v.setStatus("APROVADO");
+			b = true;
+		} else {
+			v.setLocal(local);
+			v.setStatus("REPROVADO");
+			b = false;
+		}
 		
-		Votacao v = new Votacao(local);
 		this.mapVotacao.get(codigo).add(v);
-		
-		return v.realizaVotacao(afavor, total, tipo);
+		return b;
 	}
 	
-	
+	public String exibirTramitacao(String codigo) {
+		String tramitacao = "";
+		for (int i = 0; i < this.mapVotacao.get(codigo).size(); i++) {
+			if (i < this.mapVotacao.get(codigo).size() - 1) {
+				tramitacao += this.mapVotacao.get(codigo).get(i).toString() + ", ";
+			} else if (i == this.mapVotacao.get(codigo).size() - 1) {
+				tramitacao += this.mapVotacao.get(codigo).get(i).toString();				
+			}
+		}
+		return tramitacao;
+	}
 	
 }

@@ -18,11 +18,16 @@ public abstract class Projeto {
         this.ementa = ementa;
         this.interesses = interesses;
         this.situacao = "EM VOTACAO";
-        this.nomeComissao = "(CCJC)";
+        this.nomeComissao = "CCJC";
         this.url = url;
     }
 
     
+	public String getDni() {
+		return dni;
+	}
+
+
 	public String getCodigo() {
 		return codigo;
 	}
@@ -50,15 +55,15 @@ public abstract class Projeto {
 	}
 
 	public String getNomeComissao() {
-		return nomeComissao.substring(1, nomeComissao.length() - 1);
+		return nomeComissao;
 	}
 
 	public void setNomeComissao(String nomeComissao) {
-		if (nomeComissao != null) {
-			this.nomeComissao = "(" + nomeComissao + ")";
-		} else {
-			this.nomeComissao = null;
-		}
+		this.nomeComissao = nomeComissao;
+	}
+	
+	public boolean getConclusivo() {
+		return getConclusivo();
 	}
 
 	@Override
