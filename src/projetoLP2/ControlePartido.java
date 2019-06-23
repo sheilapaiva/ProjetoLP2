@@ -33,6 +33,10 @@ public class ControlePartido {
 		this.comparador =  new NomeComparadorPartido();
 	}
 	
+	public ArrayList<Partido> getPartidos() {
+		return partidos;
+	}
+
 	/**
 	 * Cadastra um partido na lista de partidos. A partir do nome do partido.
 	 * Se esse campo não estiver nulo ou vazio.
@@ -41,9 +45,6 @@ public class ControlePartido {
 	 * @throws IllegalArgumentException, campo partido nao pode ser vazio ou nulo
 	 */
 	public void cadastrarPartido(String partido) {
-		if(partido == null || partido.isEmpty()){
-			throw new IllegalArgumentException("Erro ao cadastrar partido: partido nao pode ser vazio ou nulo");
-		}
 		Partido p = new Partido(partido);
 		this.partidos.add(p);
 	}

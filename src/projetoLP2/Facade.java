@@ -15,7 +15,19 @@ public class Facade {
 	/**
 	 * Controle geral.
 	 */
-	ControleGeral cg = new ControleGeral();
+	ControleGeral controleGeral = new ControleGeral();
+	
+	public void carregarSistema() {
+		controleGeral.carregarSistema();
+	}
+	
+	public void limparSistema() {
+		controleGeral.limparSistema();
+	}
+	
+	public void salvarSistema() {
+		controleGeral.salvarSistema();
+	}
 
 	/**
 	 * Cadastra uma pessoa no mapa de pessoa. A partir do nome, identificador, estado e interesses
@@ -27,7 +39,7 @@ public class Facade {
 	 * @param interesses, interesses da pessoa
 	 */
 	public void cadastrarPessoa(String nome, String dni, String estado, String interesses) {
-		cg.cadastrarPessoa(nome, dni, estado, interesses);
+		controleGeral.cadastrarPessoa(nome, dni, estado, interesses);
 	}
 	
 	/**
@@ -41,7 +53,7 @@ public class Facade {
 	 * @param partido, partido da pessoa
 	 */
 	public void cadastrarPessoa(String nome, String dni, String estado, String interesses, String partido) {
-		cg.cadastrarPessoa(nome, dni, estado, interesses, partido);
+		controleGeral.cadastrarPessoa(nome, dni, estado, interesses, partido);
 	}
 
 	/**
@@ -51,7 +63,7 @@ public class Facade {
 	 * @param dataDeInicio, data de inicio do mandato 
 	 */
 	public void cadastrarDeputado(String dni, String dataDeInicio) {
-		cg.cadastrarDeputado(dni, dataDeInicio);
+		controleGeral.cadastrarDeputado(dni, dataDeInicio);
 	}
 	
 	/**
@@ -61,7 +73,7 @@ public class Facade {
 	 * @return uma String representando a Pessoa com o dni passado como parametro
 	 */
 	public String exibirPessoa(String dni){
-		return cg.exibirPessoa(dni);
+		return controleGeral.exibirPessoa(dni);
 	}
 	
 	/**
@@ -70,7 +82,7 @@ public class Facade {
 	 * @param nome, o nome do partido
 	 */
 	public void cadastrarPartido(String partido) {
-		cg.cadastrarPartido(partido);
+		controleGeral.cadastrarPartido(partido);
 	}
 	
 	/**
@@ -80,7 +92,7 @@ public class Facade {
 	 * @return uma String representando os partidos
 	 */
 	public String exibirBase() {
-		return cg.exibirBase();
+		return controleGeral.exibirBase();
 	}
 	
 	/**
@@ -90,27 +102,49 @@ public class Facade {
 	 * @param politicos
 	 */
 	public void cadastrarComissao(String tema, String politicos) {
-		cg.cadastrarComissao(tema, politicos);
+		controleGeral.cadastrarComissao(tema, politicos);
 	}
 	
 	public String cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
-		return cg.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
+		return controleGeral.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
 	}
 	
 	public String cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
-		return cg.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
+		return controleGeral.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
 	}
 	
-	public String cadastraPec(String dni, int ano, String ementa, String interesses, String url, String artigos) {
-		return cg.cadastrarPec(dni, ano, ementa, interesses, url, artigos);
+	public String cadastrarPEC(String dni, int ano, String ementa, String interesses, String url, String artigos) {
+		return controleGeral.cadastrarPEC(dni, ano, ementa, interesses, url, artigos);
 		
 	}
+	
 	public String exibirProjeto(String codigo) {
-		return cg.exibirProjeto(codigo);
-		}
+		return controleGeral.exibirProjeto(codigo);
+	}
+	
+	public boolean votarComissao(String codigo, String statusGovernista, String proximoLocal) {
+		return controleGeral.votarComissao(codigo, statusGovernista, proximoLocal);
+	}
+	
+	public boolean votarPlenario(String codigo, String statusGovernista, String presentes) {
+		return controleGeral.votarPlenario(codigo, statusGovernista, presentes);
+	}
+	
+	public String exibirTramitacao(String codigo) {
+		return controleGeral.exibirTramitacao(codigo);
+	}
+	
+	public void configurarEstrategiaPropostaRelacionada(String dni, String estrategia) {
+		controleGeral.configurarEstrategiaPropostaRelacionada(dni, estrategia);
+	}
+	
+	public String pegarPropostaRelacionada(String dni) {
+		return controleGeral.pegarPropostaRelacionada(dni);
+	}
 	
 	public static void main(String[] args) {
-		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt"};
+		//args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt", "testes-eco/use_case_6.txt"}; 
+		args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_7.txt"};
 		EasyAccept.main(args);
 	}
 }

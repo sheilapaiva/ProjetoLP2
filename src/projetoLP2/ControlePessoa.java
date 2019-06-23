@@ -1,6 +1,5 @@
 package projetoLP2;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +27,11 @@ public class ControlePessoa {
 		this.mapPessoa = new HashMap<>();
 	}
 	
+	/**
+	 * Retorna um mapa que representa o mapa de comissoes.
+	 * 
+	 * @return um mapa que representa o mapa de comissoes
+	 */
 	public HashMap<String, Pessoa> getMapPessoa() {
 		return mapPessoa;
 	}
@@ -65,15 +69,7 @@ public class ControlePessoa {
 	 * @throws IllegalArgumentException, pessoa ja cadastrada
 	 */
 	public void cadastrarPessoa(String nome, String dni, String estado, String interesses) {
-		if (nome == null || nome.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: nome nao pode ser vazio ou nulo");
-		} else if (dni == null || dni.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: dni nao pode ser vazio ou nulo");
-		} else if (estado == null || estado.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: estado nao pode ser vazio ou nulo");
-		} else if (!verificaDni(dni)) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: dni invalido");
-		} else if (this.mapPessoa.containsKey(dni)) {
+		if (this.mapPessoa.containsKey(dni)) {
 			throw new IllegalArgumentException("Erro ao cadastrar pessoa: dni ja cadastrado");
 		}
 		Pessoa p = new Pessoa(nome, dni, estado, interesses);
@@ -97,15 +93,7 @@ public class ControlePessoa {
 	 * @throws IllegalArgumentException, pessoa ja cadastrada
 	 */
 	public void cadastrarPessoa(String nome, String dni, String estado, String interesses, String partido) {
-		if (nome == null || nome.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: nome nao pode ser vazio ou nulo");
-		} else if (dni == null || dni.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: dni nao pode ser vazio ou nulo");
-		} else if (estado == null || estado.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: estado nao pode ser vazio ou nulo");
-		} else if (!verificaDni(dni)) {
-			throw new IllegalArgumentException("Erro ao cadastrar pessoa: dni invalido");
-		} else if (this.mapPessoa.containsKey(dni)) {
+		if (this.mapPessoa.containsKey(dni)) {
 			throw new IllegalArgumentException("Erro ao cadastrar pessoa: dni ja cadastrado");
 		}
 		Partido novoPartido = new Partido(partido);
@@ -127,18 +115,13 @@ public class ControlePessoa {
 	 * @throws IllegalArgumentException, deputado ja existe
 	 */
 	public void cadastrarDeputado(String dni, String dataDeInicio) {
-		if (dni == null || dni.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar deputado: dni nao pode ser vazio ou nulo");
-		} else if(!verificaDni(dni)) {
-			throw new IllegalArgumentException("Erro ao cadastrar deputado: dni invalido");
-		} else if(!this.mapPessoa.containsKey(dni)) {
+		if(!this.mapPessoa.containsKey(dni)) {
 			throw new IllegalArgumentException("Erro ao cadastrar deputado: pessoa nao encontrada");
-		}else if (dataDeInicio == null || dataDeInicio.isEmpty()) {
-			throw new IllegalArgumentException("Erro ao cadastrar deputado: data nao pode ser vazio ou nulo");
 		} else if (this.mapPessoa.get(dni).getPartido() == null) {
 			throw new IllegalArgumentException("Erro ao cadastrar deputado: pessoa sem partido");
 		} 
-		validaData(dataDeInicio);
+		Validacao.validarString(dataDeInicio, "Erro ao cadastrar deputado: data nao pode ser vazio ou nulo");
+		Validacao.validaData(dataDeInicio);
 		this.mapPessoa.get(dni).setFuncao(dataDeInicio);
 	}
 	
@@ -178,11 +161,7 @@ public class ControlePessoa {
 	 * @return uma String representando a Pessoa com o dni passado como parametro
 	 */
 	public String exibirPessoa(String dni){
-		if(dni == null || dni.isEmpty()){
-			throw new IllegalArgumentException("Erro ao exibir pessoa: dni nao pode ser vazio ou nulo");
-		}else if(!verificaDni(dni)){
-			throw new IllegalArgumentException("Erro ao exibir pessoa: dni invalido");
-		}else if(!this.mapPessoa.containsKey(dni)){
+		if(!this.mapPessoa.containsKey(dni)){
 			throw new IllegalArgumentException("Erro ao exibir pessoa: pessoa nao encontrada");
 		} 
 		return this.mapPessoa.get(dni).toString();
