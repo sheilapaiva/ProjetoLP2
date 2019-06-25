@@ -1,5 +1,6 @@
 package projetoLP2;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -491,34 +492,51 @@ public class ControleGeral{
 		return listaProjetos;
 	}
 	
+	private ArrayList<String> constitucionalSort(ArrayList<String> listaProjetos){
+        boolean troca = true;
+        String aux;
+        while (troca) {
+            troca = false;
+            for (int i = 0; i < listaProjetos.size() - 1; i++) {
+                if (listaProjetos.get(i).substring(0, 3).equals("PL ") && listaProjetos.get(i + 1).substring(0, 3).equals("PEC")) {
+                	aux = listaProjetos.get(i);
+                    listaProjetos.set(i, listaProjetos.get(i + 1));
+                    listaProjetos.set(i + 1, aux);
+                    troca = true;
+                } else if (listaProjetos.get(i).substring(0, 3).equals("PLP") && listaProjetos.get(i + 1).substring(0, 3).equals("PEC")) {
+                	aux = listaProjetos.get(i);
+                    listaProjetos.set(i, listaProjetos.get(i + 1));
+                    listaProjetos.set(i + 1, aux);
+                    troca = true;
+                } else if (listaProjetos.get(i).substring(0, 3).equals("PL ") && listaProjetos.get(i + 1).substring(0, 3).equals("PLP")) {
+                    aux = listaProjetos.get(i);
+                    listaProjetos.set(i, listaProjetos.get(i + 1));
+                    listaProjetos.set(i + 1, aux);
+                    troca = true;
+                }
+            }
+        }
+        
+        return listaProjetos;
+	}
+	
 	
 	private String propostaRelacionada(String dni) {
-		ArrayList<String> listaProjetos = contagemProjInteressesDep(dni);
-		NomeComparador comparador =  new NomeComparador();
-		Collections.sort(listaProjetos, comparador);
-		//listaProjetos.sort(Collator.getInstance());
+		ArrayList<String> listaProjetos = contagemProjInteressesDep(dni);	
 		System.out.println(listaProjetos);
-		if (this.controlePessoa.getMapPessoa().get(dni).getFuncao().getEstrategia().equals("CONSTITUCIONAL")) {
-			if (listaProjetos.size() == 1) {
+		if (listaProjetos.size() == 1) {
+			return listaProjetos.get(0);
+		} else {
+			if (this.controlePessoa.getMapPessoa().get(dni).getFuncao().getEstrategia().equals("CONSTITUCIONAL")) {
+				listaProjetos.sort(Collator.getInstance());
+				listaProjetos = constitucionalSort(listaProjetos);
 				return listaProjetos.get(0);
-			} else {
-				
+			} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao().getEstrategia().equals("CONCLUSAO")) {
 				return listaProjetos.get(0);
-			}
-		} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao().getEstrategia().equals("CONCLUSAO")) {
-			if (listaProjetos.size() == 1) {
-				return listaProjetos.get(0);
-			} else {
-				return listaProjetos.get(0);
-			}
-		}else {
-			if (listaProjetos.size() == 1) {
-				return listaProjetos.get(0);
-			} else {
+			}else {
 				return listaProjetos.get(0);
 			}
 		}
-			
 	}
 	
 	public String pegarPropostaRelacionada(String dni) {
@@ -529,9 +547,7 @@ public class ControleGeral{
 		} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao() == null){ 
 			throw new IllegalArgumentException("Erro ao pegar proposta: pessoa nao eh deputado");
 		}
-		
-		//System.out.println(contagemProjInteressesDep(dni));
-		
+				
 		return this.controleProjeto.getMapProjetos().get(propostaRelacionada(dni)).toString();
 	}
 	
