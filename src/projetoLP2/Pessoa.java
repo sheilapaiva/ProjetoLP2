@@ -39,6 +39,10 @@ public class Pessoa {
 	 * Cargo da pessoa.
 	 */
 	private Cargo funcao;
+	/**
+	 * Estrategia do deputado
+	 */
+	private String estrategia;
 	
 	/**
 	 * Constroi uma pessoa, a partir do seu nome, o documento nacional de identificacao, o estado de origem e
@@ -72,6 +76,7 @@ public class Pessoa {
 		this.origem = origem;
 		this.partido = partido;
 		this.interesses = interesses;
+		this.estrategia = "CONSTITUCIONAL";
 	}
 	
 	/**
@@ -188,5 +193,13 @@ public class Pessoa {
 			return pessoa = "POL: " + pessoa + " - " + this.funcao.getDataInicio().substring(0, 2) + "/" + this.funcao.getDataInicio().substring(2, 4) + "/" + this.funcao.getDataInicio().substring(4, 8) + " - " + this.funcao.getQtdLeis() + " Leis";
 		}
 		return pessoa;
+	}
+	
+	public String getEstrategia() {
+		return this.estrategia;
+	}
+
+	public void setEstrategia(String estrategia) {
+		this.estrategia = estrategia;
 	}
 }

@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="/home/sheila/eclipse-workspace/ProjetoLP2/lib/easyaccept.jar"/>
+	<classpathentry kind="lib" path="/home/sheilammp/ProjetoLP2/lib/easyaccept.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

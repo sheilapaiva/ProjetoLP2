@@ -2,8 +2,6 @@ package projetoLP2;
 
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
-
 
 /**
  * Representação de um Controle Geral. Gerencia o controle de pessoas e o controle de partidos.
@@ -294,7 +292,7 @@ public class ControleGeral{
 			throw new IllegalArgumentException("Erro ao votar proposta: status invalido");
 		} else if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
 			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
-		}else if (this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("plenario") || this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario - 1o turno") || this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario - 2o turno")) {
+		}else if (this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario") || this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario - 1o turno") || this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario - 2o turno")) {
 			throw new IllegalArgumentException("Erro ao votar proposta: proposta encaminhada ao plenario");
 		}else if (this.controleProjeto.getMapProjetos().get(codigo).getSituacao().equals("ARQUIVADO") || this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("(-)")) { 
 			throw new IllegalArgumentException("Erro ao votar proposta: tramitacao encerrada");
@@ -311,7 +309,11 @@ public class ControleGeral{
 			else {
 				this.controleProjeto.getMapProjetos().get(codigo).setSituacao("EM VOTACAO");
 				if (this.controleProjeto.getMapProjetos().get(codigo).getCodigo().substring(0,3).equals("PL ")){
-					this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(proximoLocal);
+					if (proximoLocal.equals("plenario")) {
+						this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario");
+					} else {
+						this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(proximoLocal);
+					}
 				} else {
 					if (proximoLocal.equals("plenario")) {
 						this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario - 1o turno");
@@ -323,14 +325,18 @@ public class ControleGeral{
 		} else {
 			if (proximoLocal.equals("plenario") && this.controleProjeto.getMapProjetos().get(codigo).getConclusivo()) {
 				this.controleProjeto.getMapProjetos().get(codigo).setSituacao("EM VOTACAO");
-				this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(proximoLocal);	
+				this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario");	
 			}
 			else {
 				this.controleProjeto.getMapProjetos().get(codigo).setSituacao("ARQUIVADO");
+				if (proximoLocal.equals("plenario")) {
+					this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario");	
+				} else {
 				this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(proximoLocal);
+				}
 			}	
 		}
-		
+
 		return votacao;	
 	}
 	
@@ -391,7 +397,7 @@ public class ControleGeral{
 			throw new IllegalArgumentException("Erro ao votar proposta: status invalido");
 		} else if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
 			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
-		} else if (this.controleProjeto.getMapProjetos().get(codigo).getSituacao().equals("EM VOTACAO") && !this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("plenario") && !this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario - 2o turno")) {
+		} else if (this.controleProjeto.getMapProjetos().get(codigo).getSituacao().equals("EM VOTACAO") && !this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario") && !this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals("Plenario - 2o turno")) {
 			throw new IllegalArgumentException("Erro ao votar proposta: tramitacao em comissao");
 		} else if (criaArrayDni(presentes).size() < contarDeputados() / 2) {
 			throw new IllegalArgumentException("Erro ao votar proposta: quorum invalido");
@@ -432,63 +438,64 @@ public class ControleGeral{
 	public String exibirTramitacao(String codigo) {
 		Validacao.validarString(codigo, "Erro ao exibir tramitacao: codigo nao pode ser vazio ou nulo");
 		if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
-			throw new IllegalArgumentException("Erro ao votar proposta: projeto inexistente");
+			throw new IllegalArgumentException("Erro ao exibir tramitacao: projeto inexistente");
 		}
 		
-		if (this.controleProjeto.getMapProjetos().get(codigo).getSituacao().equals("EM VOTACAO")) {
-			return this.controleVotacao.exibirTramitacao(codigo) + ", " + this.controleProjeto.getMapProjetos().get(codigo).getSituacao() + " (" + this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao() +").";
+		if (!this.controleVotacao.getMapVotacao().containsKey(codigo)) {
+			return this.controleProjeto.getMapProjetos().get(codigo).getSituacao() + " (" + this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao() +")";
+		} else if (this.controleProjeto.getMapProjetos().get(codigo).getSituacao().equals("EM VOTACAO")) {
+			return this.controleVotacao.exibirTramitacao(codigo) + ", " + this.controleProjeto.getMapProjetos().get(codigo).getSituacao() + " (" + this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao() +")";
 		}
 		
-		return this.controleVotacao.exibirTramitacao(codigo) + ".";
+		return this.controleVotacao.exibirTramitacao(codigo);
 	}
 	
 	public void configurarEstrategiaPropostaRelacionada(String dni, String estrategia) {
 		Validacao.validarString(dni, "Erro ao configurar estrategia: dni nao pode ser vazio ou nulo");
 		Validacao.validarString(estrategia, "Erro ao configurar estrategia: estrategia nao pode ser vazio ou nulo");
 		Validacao.verificaDni(dni, "Erro ao configurar estrategia: dni invalido");
-		if (!estrategia.equals("CONSTITUCIONAL") || !estrategia.equals("CONCLUSAO") || !estrategia.equals("APROVACAO")) {
+		if (!estrategia.equals("CONSTITUCIONAL") && !estrategia.equals("CONCLUSAO") && !estrategia.equals("APROVACAO")) {
 			throw new IllegalArgumentException("Erro ao configurar estrategia: estrategia invalida");
 		} else if (!this.controlePessoa.getMapPessoa().containsKey(dni)) {
 			throw new IllegalArgumentException("Erro ao configurar estrategia: pessoa inexistente");
-		} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao() == null){ 
-			throw new IllegalArgumentException("Erro ao configurar estrategia: pessoa nao eh deputado");
 		}
 		
-		this.controlePessoa.getMapPessoa().get(dni).getFuncao().setEstrategia(estrategia);
+		this.controlePessoa.getMapPessoa().get(dni).setEstrategia(estrategia);
 	}
 	
 	private ArrayList<String> contagemProjInteressesDep(String dni) {
-		ArrayList<String> projetos = new ArrayList<>(this.controleProjeto.getMapProjetos().keySet());
+		ArrayList<String> projetos = new ArrayList<String>(this.controleProjeto.getMapProjetos().keySet());
 		String [] interessesDep = this.controlePessoa.getMapPessoa().get(dni).getInteresses().split(",");
 		String projetoInteresseMaior = "";
 		int cont = 0;
 		int contAux = 0;
 		for (String codigoProj : projetos) {
-			String [] interessesProj = this.controleProjeto.getMapProjetos().get(codigoProj).getInteresses().split(",");
-			for (String interesseProj : interessesProj) {
-				for (String interesse : interessesDep) {
-					if (interesseProj.contains(interesse)) {
-						cont++;
-						break;
+			if (this.controleProjeto.getMapProjetos().get(codigoProj).getSituacao().equals("EM VOTACAO")) {
+				String [] interessesProj = this.controleProjeto.getMapProjetos().get(codigoProj).getInteresses().split(",");
+				for (String interesseProj : interessesProj) {
+					for (String interesse : interessesDep) {
+						if (interesseProj.contains(interesse)) {
+							cont++;
+							break;
+						}
 					}
 				}
+				if(cont > 0 && cont > contAux) {
+					projetoInteresseMaior = codigoProj;
+					contAux = cont;
+				}else if(cont > 0 && cont == contAux) {
+					projetoInteresseMaior += "," + codigoProj;
+				}
+				cont = 0;
 			}
-
-			if(cont > 0 && cont > contAux) {
-				projetoInteresseMaior = codigoProj;
-				contAux = cont;
-			}else if(cont > 0 && cont == contAux) {
-				projetoInteresseMaior += "," + codigoProj;
-			}
-			cont = 0;
 		}
 		
-		ArrayList<String> listaProjetos = new ArrayList<>();
+		ArrayList<String> listaProjetos = new ArrayList<String>();
 		String[] projeto = projetoInteresseMaior.split(",");
 		for (String proj : projeto) {
 			listaProjetos.add(proj);
 		}
-		
+	
 		return listaProjetos;
 	}
 	
@@ -520,18 +527,42 @@ public class ControleGeral{
         return listaProjetos;
 	}
 	
+	private ArrayList<String> conclusaoSort(ArrayList<String> listaProjetos){
+		ArrayList<String> lista = new ArrayList<String>();
+		String codigo = "";
+		for (int i = 0; i < listaProjetos.size() - 1; i++) {
+			String projeto = this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao();
+			if (projeto.equals("Plenario - 2o turno") && !projeto.equals(codigo)) {
+				codigo = projeto;
+			} else if (projeto.equals("Plenario - 2o turno") && projeto.equals(codigo)) {
+				if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(0, 10).equals(codigo)) {
+					codigo = projeto;
+				}
+				codigo = projeto;
+			}
+		}
+		return lista;
+		
+	}
+	
 	
 	private String propostaRelacionada(String dni) {
 		ArrayList<String> listaProjetos = contagemProjInteressesDep(dni);	
 		System.out.println(listaProjetos);
-		if (listaProjetos.size() == 1) {
-			return listaProjetos.get(0);
+		System.out.println(listaProjetos.size());
+
+		if (listaProjetos.get(0).equals("")) {
+			System.out.println("oiii");
+			return "";
 		} else {
-			if (this.controlePessoa.getMapPessoa().get(dni).getFuncao().getEstrategia().equals("CONSTITUCIONAL")) {
+			if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONSTITUCIONAL")) {
 				listaProjetos.sort(Collator.getInstance());
 				listaProjetos = constitucionalSort(listaProjetos);
 				return listaProjetos.get(0);
-			} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao().getEstrategia().equals("CONCLUSAO")) {
+			} else if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONCLUSAO")) {
+				listaProjetos.sort(Collator.getInstance());
+				listaProjetos = constitucionalSort(listaProjetos);
+				listaProjetos = conclusaoSort(listaProjetos);
 				return listaProjetos.get(0);
 			}else {
 				return listaProjetos.get(0);
@@ -544,11 +575,9 @@ public class ControleGeral{
 		Validacao.verificaDni(dni, "Erro ao pegar proposta: dni invalido");
 		if (!this.controlePessoa.getMapPessoa().containsKey(dni)) {
 			throw new IllegalArgumentException("Erro ao pegar proposta: pessoa inexistente");
-		} else if (this.controlePessoa.getMapPessoa().get(dni).getFuncao() == null){ 
-			throw new IllegalArgumentException("Erro ao pegar proposta: pessoa nao eh deputado");
-		}
-				
-		return this.controleProjeto.getMapProjetos().get(propostaRelacionada(dni)).toString();
+		} 
+	
+		return propostaRelacionada(dni);
 	}
 	
 }

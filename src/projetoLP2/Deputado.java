@@ -18,10 +18,6 @@ public class Deputado implements Cargo {
 	 * Quantidade de leis do deputado
 	 */
 	private int qtdLeis;
-	/**
-	 * Estrategia do deputado
-	 */
-	private String estrategia;
 	
 	/**
 	 * Constroi um deputado a partir da pessoa e a sua data de inicio de mandato.
@@ -31,7 +27,6 @@ public class Deputado implements Cargo {
 	public Deputado(String dataInicio) {
 		this.dataInicio = dataInicio;
 		this.qtdLeis = 0;
-		this.estrategia = "CONSTITUCIONAL";
 	}
 
 	/**
@@ -52,17 +47,8 @@ public class Deputado implements Cargo {
 		return this.qtdLeis;
 	}
 
-	@Override
 	public void setQtdLeis(int qtdLeis) {
 		this.qtdLeis = qtdLeis;
 	}
 
-	public String getEstrategia() {
-		return estrategia;
-	}
-
-	public void setEstrategia(String estrategia) {
-		this.estrategia = estrategia;
-	}
-	
 }

@@ -15,8 +15,4 @@ public interface Cargo {
 	public int getQtdLeis();
 	
 	public void setQtdLeis(int qtdLeis);
-	
-	public String getEstrategia();
-
-	public void setEstrategia(String estrategia);
 }
