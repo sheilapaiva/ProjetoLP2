@@ -3,6 +3,14 @@ package projetoLP2;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Representacao o Controle de uma Comissao.
+ * 
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
+ */
 public class ControleComissao {
 	
 	/**
@@ -10,25 +18,28 @@ public class ControleComissao {
 	 */
 	private HashMap <String, Comissao> mapComissao;
 
+	/**
+	 * Constroi um controle de comissao.
+	 *
+	 */
 	public ControleComissao() {
 		this.mapComissao = new HashMap<>();
 	}
 	
+	/**
+	 * Retorna a um mapa de String que representa as Comissao.
+	 * 
+	 * @return uma String que representa o nome
+	 */
 	public HashMap<String, Comissao> getMapComissao() {
 		return mapComissao;
 	}
 	
 	/**
-	 * FALTAM TRATAR EXCECOES!
 	 * Cadastra uma comissao no mapa de comissao. A partir do tema e da lista de politicos.
-	 * Se esses campos não estiverem nulos ou vazios e forem validos. Usa o tema como chave
-	 * para o mapa.
 	 * 
 	 * @param tema, tema da comissao
 	 * @param politicos, lista de politicos
-	 * @throws IllegalArgumentException, campo tema nao pode ser vazio ou nulo
-	 * @throws IllegalArgumentException, campo lista de politicos nao pode ser vazio ou nulo
-	 * @throws IllegalArgumentException, campo dni invalido 
 	 */
 	public void cadastrarComissao(String tema, ArrayList<String> politicos) {
 		Comissao comissao = new Comissao(tema, politicos);

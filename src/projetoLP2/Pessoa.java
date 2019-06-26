@@ -39,6 +39,10 @@ public class Pessoa {
 	 * Cargo da pessoa.
 	 */
 	private Cargo funcao;
+	/**
+	 * Estrategia do deputado
+	 */
+	private String estrategia;
 	
 	/**
 	 * Constroi uma pessoa, a partir do seu nome, o documento nacional de identificacao, o estado de origem e
@@ -72,6 +76,7 @@ public class Pessoa {
 		this.origem = origem;
 		this.partido = partido;
 		this.interesses = interesses;
+		this.estrategia = "CONSTITUCIONAL";
 	}
 	
 	/**
@@ -119,6 +124,11 @@ public class Pessoa {
 		return interesses;
 	}
 
+	/**
+	 * Retorna um Cargo que representa o cargo da pessoa.
+	 * 
+	 * @return um Cargo que representa o cargo 
+	 */
 	public Cargo getFuncao() {
 		return funcao;
 	}
@@ -128,6 +138,22 @@ public class Pessoa {
 	 */
 	public void setFuncao(String dataInicio) {
 		this.funcao= new Deputado(dataInicio);
+	}
+	
+	/**
+	 * Retorna uma String que representa a estrategia.
+	 * 
+	 * @return uma String que representa a estrategia
+	 */
+	public String getEstrategia() {
+		return this.estrategia;
+	}
+
+	/**
+	 * Seta uma String que representa a estrategia.
+	 */
+	public void setEstrategia(String estrategia) {
+		this.estrategia = estrategia;
 	}
 
 	/**
@@ -189,4 +215,5 @@ public class Pessoa {
 		}
 		return pessoa;
 	}
+
 }
