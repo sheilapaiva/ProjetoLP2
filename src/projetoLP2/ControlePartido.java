@@ -23,7 +23,6 @@ public class ControlePartido {
 	* Comparador de partido.
 	*/
 	private Comparator<Partido> comparador;
-	
 
 	/**
 	 * Constroi um controle de partidos.
@@ -33,16 +32,19 @@ public class ControlePartido {
 		this.comparador =  new NomeComparadorPartido();
 	}
 	
+	/**
+	 * Retorna a um arraylist Partidos que representa os partidos.
+	 * 
+	 * @return a um arraylist Partidos que representa os partidos.
+	 */
 	public ArrayList<Partido> getPartidos() {
 		return partidos;
 	}
 
 	/**
 	 * Cadastra um partido na lista de partidos. A partir do nome do partido.
-	 * Se esse campo não estiver nulo ou vazio.
 	 * 
 	 * @param nome, o nome do partido
-	 * @throws IllegalArgumentException, campo partido nao pode ser vazio ou nulo
 	 */
 	public void cadastrarPartido(String partido) {
 		Partido p = new Partido(partido);
@@ -70,4 +72,5 @@ public class ControlePartido {
 		}
 		return base;
 	}
+	
 }

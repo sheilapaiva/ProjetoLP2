@@ -29,16 +29,7 @@ class TesteControlePessoa {
 		cp.cadastrarDeputado("123456789-1", "05052019");
 	}
 	
-	@Test
-	void testeVerificaDniValido() {
-		assertTrue(cp.verificaDni("123456789-0")); 
-	}
-	
-	@Test
-	void testeVerificaDniInvalido() {
-		assertFalse(cp.verificaDni("AA3456789-0")); 
-	}
-	
+
 	@Test
 	void testeCadastrarPessoa1NomeNulo() {
 		try {
@@ -301,32 +292,7 @@ class TesteControlePessoa {
 		assertEquals(cp.exibirPessoa("123456709-0"), "POL: joana - 123456709-0 (PE) - UNB - Interesses: saude - 01/04/2019 - 0 Leis");
 	}
 	
-	@Test
-	void testeValidaDataInvalida1() {
-		try {
-			cp.validaData("020319");
-		} catch (RuntimeException nv) {
-			assertEquals(nv.getMessage(), "Erro ao cadastrar deputado: data invalida");
-		}
-	}
 	
-	@Test
-	void testeValidaDataInvalida2() {
-		try {
-			cp.validaData("31042019");
-		} catch (RuntimeException nv) {
-			assertEquals(nv.getMessage(), "Erro ao cadastrar deputado: data invalida");
-		}
-	}
-	
-	@Test
-	void testeValidaDataFutura() {
-		try {
-			cp.validaData("07092019");
-		} catch (RuntimeException nv) {
-			assertEquals(nv.getMessage(), "Erro ao cadastrar deputado: data futura");
-		}
-	}
 	
 	@Test
 	void testExibePessoaDniInvalido(){

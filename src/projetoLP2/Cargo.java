@@ -10,9 +10,22 @@ package projetoLP2;
  */
 public interface Cargo {
 	
+	/**
+	 * Retorna uma String que representa a data do inicio.
+	 * 
+	 * @return uma String que representa a data do inicio.
+	 */
 	public String getDataInicio();
 	
+	/**
+	 * Retorna um inteiro que representa a quantidade de leis.
+	 * 
+	 * @return um inteiro que representa a quantidade de leis.
+	 */
 	public int getQtdLeis();
 	
+	/**
+	 * Seta uma String que representa a quantidade de leis.
+	 */
 	public void setQtdLeis(int qtdLeis);
 }

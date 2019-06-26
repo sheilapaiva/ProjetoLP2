@@ -124,6 +124,11 @@ public class Pessoa {
 		return interesses;
 	}
 
+	/**
+	 * Retorna um Cargo que representa o cargo da pessoa.
+	 * 
+	 * @return um Cargo que representa o cargo 
+	 */
 	public Cargo getFuncao() {
 		return funcao;
 	}
@@ -133,6 +138,22 @@ public class Pessoa {
 	 */
 	public void setFuncao(String dataInicio) {
 		this.funcao= new Deputado(dataInicio);
+	}
+	
+	/**
+	 * Retorna uma String que representa a estrategia.
+	 * 
+	 * @return uma String que representa a estrategia
+	 */
+	public String getEstrategia() {
+		return this.estrategia;
+	}
+
+	/**
+	 * Seta uma String que representa a estrategia.
+	 */
+	public void setEstrategia(String estrategia) {
+		this.estrategia = estrategia;
 	}
 
 	/**
@@ -194,12 +215,5 @@ public class Pessoa {
 		}
 		return pessoa;
 	}
-	
-	public String getEstrategia() {
-		return this.estrategia;
-	}
 
-	public void setEstrategia(String estrategia) {
-		this.estrategia = estrategia;
-	}
 }

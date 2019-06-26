@@ -45,14 +45,23 @@ public class ControleGeral{
 		this.controleVotacao = new ControleVotacao();
 	}
 	
+	/**
+	 * Carrega o sistema.
+	 */
 	public void carregarSistema() {
 		
 	}
 	
+	/**
+	 * Limpa o sistema.
+	 */
 	public void limparSistema() {
 		
 	}
 	
+	/**
+	 * Salva o sistema.
+	 */
 	public void salvarSistema() {
 		
 	}
@@ -136,6 +145,12 @@ public class ControleGeral{
 		return this.controlePartido.exibirBase();
 	}
 	
+	/**
+	 * Cria um ArrayListe de Dni de politicos passados por parametro.
+	 * 
+	 * @param politicos, os politicos
+	 * @return ArrayList de dni.
+	 */
 	private ArrayList<String> criaListaPoliticos(String politicos) {
 		String[] lista = politicos.split(",");
 		ArrayList<String> listaDni = new ArrayList<String>();
@@ -152,16 +167,11 @@ public class ControleGeral{
 	}
 	
 	/**
-	 * FALTAM TRATAR EXCECOES!
-	 * Cadastra uma comissao no mapa de comissao. A partir do tema e da lista de politicos.
-	 * Se esses campos não estiverem nulos ou vazios e forem validos. Usa o tema como chave
-	 * para o mapa.
+	 * Cadastra uma comissao. A partir do tema e da lista de politicos.
 	 * 
 	 * @param tema, tema da comissao
-	 * @param politicos, lista de politicos
-	 * @throws IllegalArgumentException, campo tema nao pode ser vazio ou nulo
-	 * @throws IllegalArgumentException, campo lista de politicos nao pode ser vazio ou nulo
-	 * @throws IllegalArgumentException, campo dni invalido 
+	 * @param politicos, lista de politicos 
+	 * @throws IllegalArgumentException, tema existente
 	 */
 	public void cadastrarComissao(String tema, String politicos) {
 		Validacao.validarString(tema, "Erro ao cadastrar comissao: tema nao pode ser vazio ou nulo");
@@ -173,6 +183,19 @@ public class ControleGeral{
 		this.controleComissao.cadastrarComissao(tema, criaListaPoliticos(politicos));
 	}
 	
+	/**
+	 * Cadastra uma PL. A partir do dni, ano, ementa, interesses, url e conclusivo.
+	 * 
+     * @param dni, o numero do projeto
+     * @param ano, o ano do projeto
+     * @param ementa, as ementas do projeto
+     * @param interesses, os interesses do projeto
+     * @param url, a url do projeto
+	 * @param conclusivo, o conclusivo do projeto
+	 * @throws IllegalArgumentException, pessoa inexistente
+	 * @throws IllegalArgumentException, pessoa nao eh deputado
+	 * @return codigo gerado do projeto
+	 */
 	public String cadastrarPL(String dni, int ano, String ementa, String interesses, String url, boolean conclusivo) {
 		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
 		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
@@ -189,7 +212,19 @@ public class ControleGeral{
 		return this.controleProjeto.cadastrarPL(dni, ano, ementa, interesses, url, conclusivo);
 	}
 	
-	
+	/**
+	 * Cadastra uma PLP. A partir do dni, ano, ementa, interesses, url e artigos.
+	 * 
+     * @param dni, o numero do projeto
+     * @param ano, o ano do projeto
+     * @param ementa, as ementas do projeto
+     * @param interesses, os interesses do projeto
+     * @param url, a url do projeto
+	 * @param artigos, os artigos do projeto
+	 * @throws IllegalArgumentException, pessoa inexistente
+	 * @throws IllegalArgumentException, pessoa nao eh deputado
+	 * @return codigo gerado do projeto
+	 */
 	public String cadastrarPLP(String dni, int ano, String ementa, String interesses, String url, String artigos) {
 		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
 		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
@@ -207,6 +242,19 @@ public class ControleGeral{
 		return this.controleProjeto.cadastrarPLP(dni, ano, ementa, interesses, url, artigos);
 	}
 	
+	/**
+	 * Cadastra uma PEC. A partir do dni, ano, ementa, interesses, url e artigos.
+	 * 
+     * @param dni, o numero do projeto
+     * @param ano, o ano do projeto
+     * @param ementa, as ementas do projeto
+     * @param interesses, os interesses do projeto
+     * @param url, a url do projeto
+	 * @param artigos, os artigos do projeto
+	 * @throws IllegalArgumentException, pessoa inexistente
+	 * @throws IllegalArgumentException, pessoa nao eh deputado
+	 * @return codigo gerado do projeto
+	 */
 	public String cadastrarPEC(String dni, int ano, String ementa, String interesses, String url, String artigos) {
 		Validacao.validarString(dni, "Erro ao cadastrar projeto: autor nao pode ser vazio ou nulo");
 		Validacao.validarString(ementa, "Erro ao cadastrar projeto: ementa nao pode ser vazia ou nula");
@@ -223,6 +271,13 @@ public class ControleGeral{
 		return this.controleProjeto.cadastrarPEC(dni, ano, ementa, interesses, url, artigos);
 	}
 	
+	/**
+	 * Exibe um projeto, a partir do codigo passado no parametro.
+	 * 
+	 * @param codigo
+	 * @throws IllegalArgumentException, projeto inexistente
+	 * @return uma String que representa o projeto
+	 */
 	public String exibirProjeto(String codigo) {
 		Validacao.validarString(codigo, "Erro ao exibir projeto: projeto nao pode ser vazio ou nulo");
 		if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
@@ -232,6 +287,12 @@ public class ControleGeral{
 		return this.controleProjeto.exibirProjeto(codigo);
 	}
 	
+	/**
+	 * Conta quantos deputados fazem parte da base governista.
+	 * 
+	 * @param dni, lista de dni de deputados
+	 * @return inteiro referete a quantidade de deputados da base
+	 */
 	private int contagemBase(ArrayList<String> dni) {
 		int cont = 0;
 		for (int i = 0; i < dni.size(); i++) {
@@ -243,6 +304,13 @@ public class ControleGeral{
 		return cont;
 	}
 	
+	/**
+	 * Conta os interesses em comum dos deputados da lista com os interesses passados tambem como parametro.
+	 * 
+	 * @param dni, a lista de dni
+	 * @param interesses, os interesses
+	 * @return inteiro referente a contagem de interesses
+	 */
 	private int contagemInteresses(ArrayList<String> dni, String interesses) {
 		String[] listaInteresses = interesses.split(",");
 		ArrayList<String> interessesProjeto = new ArrayList<String>();
@@ -264,6 +332,14 @@ public class ControleGeral{
 		return contDep;
 	}
 	
+	/**
+	 * Vota o projeto em uma comissao
+	 * 
+	 * @param codigo, o codigo do projeto
+	 * @param status, o status da votacao
+	 * @throws IllegalArgumentException, comissao nao cadastrada
+	 * @return boolean referente ao resultado da votacao
+	 */
 	private boolean votacaoComissao(String codigo, String status) {
 		Projeto projeto = this.controleProjeto.getMapProjetos().get(codigo);
 		Comissao comissao = this.controleComissao.getMapComissao().get(projeto.getNomeComissao());
@@ -284,6 +360,18 @@ public class ControleGeral{
 		return this.controleVotacao.realizarVotacao(codigo, projeto.getNomeComissao(), cont, comissao.getPoliticos().size(), "COMISSAO");
 	}
 	
+	/**
+	 * Vota o projeto em uma comissao, com o codigo, o status da votacao e o proximo local passados por parametro.
+	 * 
+	 * @param codigo, o codigo do projeto.
+	 * @param statusGovernista, o status da votacao
+	 * @param proximoLocal, o proximo local de votacao
+	 * @throws IllegalArgumentException, status invalido
+	 * @throws IllegalArgumentException, projeto inexistente
+	 * @throws IllegalArgumentException, proposta encaminhada para plenario
+	 * @throws IllegalArgumentException, tramitacao encerrada
+	 * @return boolean referente ao resultado da votacao
+	 */
 	public boolean votarComissao(String codigo, String statusGovernista, String proximoLocal) {
 		Validacao.validarString(codigo, "Erro ao votar proposta: codigo nao pode ser vazio ou nulo");
 		Validacao.validarString(statusGovernista, "Erro ao votar proposta: status governista nao pode ser vazio ou nulo");
@@ -323,11 +411,16 @@ public class ControleGeral{
 				}
 			}
 		} else {
-			if (proximoLocal.equals("plenario") && this.controleProjeto.getMapProjetos().get(codigo).getConclusivo()) {
-				this.controleProjeto.getMapProjetos().get(codigo).setSituacao("EM VOTACAO");
-				this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario");	
-			}
-			else {
+			if (this.controleProjeto.getMapProjetos().get(codigo).getCodigo().substring(0,3).equals("PL ")){
+				if (proximoLocal.equals("plenario") && ((Pl)this.controleProjeto.getMapProjetos().get(codigo)).getConclusivo()) {
+					this.controleProjeto.getMapProjetos().get(codigo).setSituacao("EM VOTACAO");
+					this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario");	
+				} else {
+					this.controleProjeto.getMapProjetos().get(codigo).setSituacao("ARQUIVADO");
+					this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao(proximoLocal);
+				}
+				
+			} else {
 				this.controleProjeto.getMapProjetos().get(codigo).setSituacao("ARQUIVADO");
 				if (proximoLocal.equals("plenario")) {
 					this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario");	
@@ -340,6 +433,12 @@ public class ControleGeral{
 		return votacao;	
 	}
 	
+	/**
+	 * Cria um array de dni de politicos
+	 * 
+	 * @param politicos, os politicos
+	 * @return ArrayList de Strings com o dni dos politicos
+	 */
 	private ArrayList<String> criaArrayDni(String politicos){
 		String[] listaPoliticos = politicos.split(",");
 		ArrayList<String> listaDni = new ArrayList<String>();
@@ -350,6 +449,15 @@ public class ControleGeral{
 		return listaDni;
 	}
 	
+	/**
+	 * Vota o projeto no plenario.
+	 * 
+	 * @param codigo, o codigo do projeto.
+	 * @param statusGovernista, o status da votacao
+	 * @param presentes, os deputados presentes na votacao
+	 * @param local, o local da votacao
+	 * @return boolean referente ao resultado da votacao
+	 */
 	private boolean votacaoPlenario(String codigo, String status, String presentes, String local) {
 		Projeto projeto = this.controleProjeto.getMapProjetos().get(codigo);
 		ArrayList<String> listaDni = new ArrayList<String>();
@@ -375,6 +483,11 @@ public class ControleGeral{
 	
 	}
 	
+	/**
+	 * Conta os deputados cadastrados no sistema.
+	 * 
+	 * @return inteiro referente a quantidade de deputados cadastrados
+	 */
 	private int contarDeputados() {
 		int cont = 0;
 		ArrayList<Pessoa> pessoas = new ArrayList<>();
@@ -388,7 +501,19 @@ public class ControleGeral{
 		return cont;
 	}
 	
-	
+	/**
+	 * Vota o projeto no plenario, com o codigo,, status e os presentes passados por parametro.
+	 * 
+	 * @param codigo, o codigo do projeto.
+	 * @param statusGovernista, o status da votacao
+	 * @param presentes, os deputados presentes na votacao
+	 * @throws IllegalArgumentException, status invalido
+	 * @throws IllegalArgumentException, projeto inexistente
+	 * @throws IllegalArgumentException, tramitacao em comissao
+	 * @throws IllegalArgumentException, quorum invalido
+	 * @throws IllegalArgumentException, tramitacao encerrada
+	 * @return boolean referente ao resultado da votacao
+	 */
 	public boolean votarPlenario(String codigo, String statusGovernista, String presentes) {		
 		Validacao.validarString(codigo, "Erro ao votar proposta: codigo nao pode ser vazio ou nulo");
 		Validacao.validarString(statusGovernista, "Erro ao votar proposta: status governista nao pode ser vazio ou nulo");
@@ -435,6 +560,13 @@ public class ControleGeral{
 		return votacao;
 	}
 	
+	/**
+	 * Exibe a tramitacao da proposta com o codigo passado por parametro.
+	 *  
+	 * @param codigo, o codigo do projeto
+	 * @throws IllegalArgumentException, projeto inexistente
+	 * @return String referente a tramitacao do projeto
+	 */
 	public String exibirTramitacao(String codigo) {
 		Validacao.validarString(codigo, "Erro ao exibir tramitacao: codigo nao pode ser vazio ou nulo");
 		if (!this.controleProjeto.getMapProjetos().containsKey(codigo)) {
@@ -450,6 +582,14 @@ public class ControleGeral{
 		return this.controleVotacao.exibirTramitacao(codigo);
 	}
 	
+	/**
+	 * Configura a estrategia de um deputado. Com o dni passado por parametro e a estrategia.
+	 * 
+	 * @param dni, deni do deputado
+	 * @param estrategia, estrategia do deputado
+	 * @throws IllegalArgumentException, estrategia invalida
+	 * @throws IllegalArgumentException, pessoa inexistente
+	 */
 	public void configurarEstrategiaPropostaRelacionada(String dni, String estrategia) {
 		Validacao.validarString(dni, "Erro ao configurar estrategia: pessoa nao pode ser vazia ou nula");
 		Validacao.verificaDni(dni, "Erro ao configurar estrategia: dni invalido");
@@ -464,6 +604,12 @@ public class ControleGeral{
 		this.controlePessoa.getMapPessoa().get(dni).setEstrategia(estrategia);
 	}
 	
+	/**
+	 * Conta os interesses em comum do deputados passado por parametro com os projetos em tramitacao.
+	 * 
+	 * @param dni, o dni do deputado
+	 * @return ArrayList referente aos codigos dos projetos com mais interesses em comum com o deputado
+	 */
 	private ArrayList<String> contagemProjInteressesDep(String dni) {
 		ArrayList<String> projetos = new ArrayList<String>(this.controleProjeto.getMapProjetos().keySet());
 		String [] interessesDep = this.controlePessoa.getMapPessoa().get(dni).getInteresses().split(",");
@@ -500,6 +646,12 @@ public class ControleGeral{
 		return listaProjetos;
 	}
 	
+	/**
+	 * Ordena o ArrayList de codigos dos projetos de acordo com a estrategia Constitucional.
+	 * 
+	 * @param listaProjetos, ArrayList de projetos
+	 * @return ArrayList ordenado
+	 */
 	private ArrayList<String> constitucionalSort(ArrayList<String> listaProjetos){
         boolean troca = true;
         String aux;
@@ -523,81 +675,97 @@ public class ControleGeral{
                     troca = true;
                 }
             }
-        }
+        } 
         
         return listaProjetos;
 	}
 	
+	/**
+	 * Ordena o ArrayList de codigos dos projetos de acordo com a estrategia Conclusao.
+	 * 
+	 * @param listaProjetos, ArrayList de projetos
+	 * @return ArrayList ordenado
+	 */
 	private ArrayList<String> conclusaoSort(ArrayList<String> listaProjetos){
 		boolean troca = true;
-		boolean control = false;
         String aux;
         while (troca) {
             troca = false;
             for (int i = 0; i < listaProjetos.size() - 1; i++) {
             	if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 2o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 2o turno")) {
-                	listaProjetos.remove(i + 1);
-                	troca = true;
-            		/**aux = listaProjetos.get(i);
-                    listaProjetos.set(i, listaProjetos.get(i + 1));
-                    listaProjetos.set(i + 1, aux);
-                    control = true;
-                    troca = true;**/
-                } else if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 2o turno")) {
-                	listaProjetos.remove(i + 1);
-                	/**aux = listaProjetos.get(i);
-                    listaProjetos.set(i, listaProjetos.get(i + 1));
-                    listaProjetos.set(i + 1, aux);
-                    control = true;**/
+            		listaProjetos.remove(i + 1);
                     troca = true;
+                    break;
+                } else if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 2o turno")) {
+                	listaProjetos.remove(i + 1);
+            		aux = listaProjetos.get(i);
+                    listaProjetos.set(i, listaProjetos.get(i + 1));
+                    listaProjetos.set(i + 1, aux);
+                    troca = true;
+                    break;
         		} else if (!this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getNomeComissao().equals("CCJC") && this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getNomeComissao().equals("CCJC")) {
         			listaProjetos.remove(i + 1);
-                	/**aux = listaProjetos.get(i);
+        			System.out.println("kkkkk");
+            		
+        			aux = listaProjetos.get(i);
                     listaProjetos.set(i, listaProjetos.get(i + 1));
                     listaProjetos.set(i + 1, aux);
-                    control = true;**/
+        			System.out.println("entrou aq");
                     troca = true;
-                } else { 
-                	int ano1 = Integer.parseInt(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(listaProjetos.get(i).length() - 4, listaProjetos.get(i).length()));
-                	int ano2 = Integer.parseInt(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getCodigo().substring(listaProjetos.get(i + 1).length() - 4, listaProjetos.get(i + 1).length()));
-                	System.out.println(ano1 + " " + ano2);
-                	if (ano1 == ano2) {
-                		int num1 = Integer.parseInt(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(listaProjetos.get(i).length() - 6, listaProjetos.get(i).length() - 5));
-                		int num2 = Integer.parseInt(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getCodigo().substring(listaProjetos.get(i + 1).length() - 6, listaProjetos.get(i + 1).length() - 5));
-                		System.out.println(num1 + " " + num2);
-                		/**if (num1 > num2) {
-                    		aux = listaProjetos.get(i);
-                            listaProjetos.set(i, listaProjetos.get(i + 1));
-                            listaProjetos.set(i + 1, aux);
-                            troca = true;
-                           // System.out.println("tatrocanu");
-                            System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(listaProjetos.get(i).length() - 4, listaProjetos.get(i).length()));
-                            //System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getCodigo().substring(listaProjetos.get(i + 1).length() - 6, listaProjetos.get(i + 1).length() - 5));
-
-                    	} **/
-                	} else {	
-	                	if (ano1 > ano2) {
-	                		listaProjetos.remove(i + 1);
-	                    	/**aux = listaProjetos.get(i);
-	                        listaProjetos.set(i, listaProjetos.get(i + 1));
-	                        listaProjetos.set(i + 1, aux);
-	                        control = true;**/
-	                        troca = true;
-	                        //System.out.println("tatrocanu");
-	                       // System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(listaProjetos.get(i).length() - 4, listaProjetos.get(i).length()));
-	                        //System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getCodigo().substring(listaProjetos.get(i + 1).length() - 6, listaProjetos.get(i + 1).length() - 5));
-
-	                	}
-                	
-                }
-
-            }}
+                    break;
+        		} 
+            }
+        }      
+       
+        System.out.println(listaProjetos);
+        if (listaProjetos.size() > 1) {
+        	
         }
+	        troca = true;
+	        while (troca) {
+	            troca = false;
+	            for (int i = 0; i < listaProjetos.size() - 1; i++) {
+	            	System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getAno());
+	            	System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getAno());
+	
+	            	if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getAno() > this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getAno()) {
+				        			aux = listaProjetos.get(i);
+				                    listaProjetos.set(i, listaProjetos.get(i + 1));
+				                    listaProjetos.set(i + 1, aux);
+				                    listaProjetos.remove(i);
+				                    troca = true;
+				                    System.out.println("kkkkk");
+				                   break;
+	                	}
+	               	 
+	                else if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getAno() == this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getAno()) {
+	                	System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getNum());
+	                	System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getNum());
+	                	  if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getNum() > this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getNum()) {
+			                	aux = listaProjetos.get(i);
+			                    listaProjetos.set(i, listaProjetos.get(i + 1));
+			                    listaProjetos.set(i + 1, aux);
+			                    listaProjetos.remove(i);
+			                    System.out.println("kkkassskk");
+			                    troca = true;
+			                    break;
+	                		}
+		                  
+		            }
+                
+                }
+        }  
+  
         return listaProjetos;
 		
 	}
-	
-	
+
+	/**
+	 * Exibe a proposta mais relacionada com o deputado com o dni passado por parametro, respeitando os criterios de empate.
+	 *  
+	 * @param dni, o dni do deputado
+	 * @return String referente ao codigo do projeto mais relacionado
+	 */
 	private String propostaRelacionada(String dni) {
 		ArrayList<String> listaProjetos = contagemProjInteressesDep(dni);	
 
@@ -610,9 +778,9 @@ public class ControleGeral{
 				return listaProjetos.get(0);
 			} else if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONCLUSAO")) {
 				System.out.println(listaProjetos);
-				//listaProjetos.sort(Collator.getInstance().reversed());
+				//listaProjetos.sort(Collator.getInstance());
 				//System.out.println(listaProjetos);
-				//listaProjetos = constitucionalSort(listaProjetos);
+				listaProjetos = constitucionalSort(listaProjetos);
 				//listaProjetos.sort(Collator.);
 				listaProjetos = conclusaoSort(listaProjetos);
 				System.out.println("aq o: " + listaProjetos);
@@ -625,6 +793,13 @@ public class ControleGeral{
 		}
 	}
 	
+	/**
+	 * Exibe a proposta mais relacionada com o deputado com o dni passado cpor parametro.
+	 *  
+	 * @param dni, o dni do deputado
+	 * @throws IllegalArgumentException, pessoa inexistente
+	 * @return String referente ao codigo do projeto mais relacionado
+	 */
 	public String pegarPropostaRelacionada(String dni) {
 		Validacao.verificaDni(dni, "Erro ao pegar proposta relacionada: dni invalido");
 		Validacao.validarString(dni, "Erro ao pegar proposta relacionada: pessoa nao pode ser vazia ou nula");

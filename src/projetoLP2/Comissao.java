@@ -2,6 +2,14 @@ package projetoLP2;
 
 import java.util.ArrayList;
 
+/**
+ * Representa uma classe de uma Comissao. 
+ * 
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
+ */
 public class Comissao {
 	
 	/**
@@ -26,10 +34,20 @@ public class Comissao {
 		this.politicos.addAll(politicos);
 	}
 	
+	/**
+	 * Retorna uma String que representa o tema do projeto.
+	 * 
+	 * @return  uma String que representa o tema
+	 */
 	public String getTema() {
 		return tema;
 	}
 
+	/**
+	 * Retorna um Array de String que representa os politicos do projeto.
+	 * 
+	 * @return um Array de String que representa os politicos
+	 */
 	public ArrayList<String> getPoliticos() {
 		return politicos;
 	}

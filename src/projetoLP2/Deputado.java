@@ -47,6 +47,9 @@ public class Deputado implements Cargo {
 		return this.qtdLeis;
 	}
 
+	/**
+	 * Seta um inteiro que representa a quantidade de leis da pessoa.
+	 */
 	public void setQtdLeis(int qtdLeis) {
 		this.qtdLeis = qtdLeis;
 	}
