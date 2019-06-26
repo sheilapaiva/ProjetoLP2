@@ -28,4 +28,8 @@ public class Pec extends Projeto {
 		}
 	}
 
+	public String getArtigos() {
+		return artigos;
+	}
+
 }

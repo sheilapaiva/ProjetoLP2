@@ -65,6 +65,8 @@ public abstract class Projeto {
 	public boolean getConclusivo() {
 		return getConclusivo();
 	}
+	
+    
 
 	@Override
 	public int hashCode() {
