@@ -451,9 +451,10 @@ public class ControleGeral{
 	}
 	
 	public void configurarEstrategiaPropostaRelacionada(String dni, String estrategia) {
-		Validacao.validarString(dni, "Erro ao configurar estrategia: dni nao pode ser vazio ou nulo");
-		Validacao.validarString(estrategia, "Erro ao configurar estrategia: estrategia nao pode ser vazio ou nulo");
+		Validacao.validarString(dni, "Erro ao configurar estrategia: pessoa nao pode ser vazia ou nula");
 		Validacao.verificaDni(dni, "Erro ao configurar estrategia: dni invalido");
+		Validacao.validarString(estrategia, "Erro ao configurar estrategia: estrategia vazia");
+		
 		if (!estrategia.equals("CONSTITUCIONAL") && !estrategia.equals("CONCLUSAO") && !estrategia.equals("APROVACAO")) {
 			throw new IllegalArgumentException("Erro ao configurar estrategia: estrategia invalida");
 		} else if (!this.controlePessoa.getMapPessoa().containsKey(dni)) {
@@ -528,31 +529,79 @@ public class ControleGeral{
 	}
 	
 	private ArrayList<String> conclusaoSort(ArrayList<String> listaProjetos){
-		ArrayList<String> lista = new ArrayList<String>();
-		String codigo = "";
-		for (int i = 0; i < listaProjetos.size() - 1; i++) {
-			String projeto = this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao();
-			if (projeto.equals("Plenario - 2o turno") && !projeto.equals(codigo)) {
-				codigo = projeto;
-			} else if (projeto.equals("Plenario - 2o turno") && projeto.equals(codigo)) {
-				if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(0, 10).equals(codigo)) {
-					codigo = projeto;
-				}
-				codigo = projeto;
-			}
-		}
-		return lista;
+		boolean troca = true;
+		boolean control = false;
+        String aux;
+        while (troca) {
+            troca = false;
+            for (int i = 0; i < listaProjetos.size() - 1; i++) {
+            	if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 2o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 2o turno")) {
+                	listaProjetos.remove(i + 1);
+                	troca = true;
+            		/**aux = listaProjetos.get(i);
+                    listaProjetos.set(i, listaProjetos.get(i + 1));
+                    listaProjetos.set(i + 1, aux);
+                    control = true;
+                    troca = true;**/
+                } else if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 2o turno")) {
+                	listaProjetos.remove(i + 1);
+                	/**aux = listaProjetos.get(i);
+                    listaProjetos.set(i, listaProjetos.get(i + 1));
+                    listaProjetos.set(i + 1, aux);
+                    control = true;**/
+                    troca = true;
+        		} else if (!this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getNomeComissao().equals("CCJC") && this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getNomeComissao().equals("CCJC")) {
+        			listaProjetos.remove(i + 1);
+                	/**aux = listaProjetos.get(i);
+                    listaProjetos.set(i, listaProjetos.get(i + 1));
+                    listaProjetos.set(i + 1, aux);
+                    control = true;**/
+                    troca = true;
+                } else { 
+                	int ano1 = Integer.parseInt(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(listaProjetos.get(i).length() - 4, listaProjetos.get(i).length()));
+                	int ano2 = Integer.parseInt(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getCodigo().substring(listaProjetos.get(i + 1).length() - 4, listaProjetos.get(i + 1).length()));
+                	System.out.println(ano1 + " " + ano2);
+                	if (ano1 == ano2) {
+                		int num1 = Integer.parseInt(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(listaProjetos.get(i).length() - 6, listaProjetos.get(i).length() - 5));
+                		int num2 = Integer.parseInt(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getCodigo().substring(listaProjetos.get(i + 1).length() - 6, listaProjetos.get(i + 1).length() - 5));
+                		System.out.println(num1 + " " + num2);
+                		/**if (num1 > num2) {
+                    		aux = listaProjetos.get(i);
+                            listaProjetos.set(i, listaProjetos.get(i + 1));
+                            listaProjetos.set(i + 1, aux);
+                            troca = true;
+                           // System.out.println("tatrocanu");
+                            System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(listaProjetos.get(i).length() - 4, listaProjetos.get(i).length()));
+                            //System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getCodigo().substring(listaProjetos.get(i + 1).length() - 6, listaProjetos.get(i + 1).length() - 5));
+
+                    	} **/
+                	} else {	
+	                	if (ano1 > ano2) {
+	                		listaProjetos.remove(i + 1);
+	                    	/**aux = listaProjetos.get(i);
+	                        listaProjetos.set(i, listaProjetos.get(i + 1));
+	                        listaProjetos.set(i + 1, aux);
+	                        control = true;**/
+	                        troca = true;
+	                        //System.out.println("tatrocanu");
+	                       // System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getCodigo().substring(listaProjetos.get(i).length() - 4, listaProjetos.get(i).length()));
+	                        //System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getCodigo().substring(listaProjetos.get(i + 1).length() - 6, listaProjetos.get(i + 1).length() - 5));
+
+	                	}
+                	
+                }
+
+            }}
+        }
+        return listaProjetos;
 		
 	}
 	
 	
 	private String propostaRelacionada(String dni) {
 		ArrayList<String> listaProjetos = contagemProjInteressesDep(dni);	
-		System.out.println(listaProjetos);
-		System.out.println(listaProjetos.size());
 
 		if (listaProjetos.get(0).equals("")) {
-			System.out.println("oiii");
 			return "";
 		} else {
 			if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONSTITUCIONAL")) {
@@ -560,21 +609,27 @@ public class ControleGeral{
 				listaProjetos = constitucionalSort(listaProjetos);
 				return listaProjetos.get(0);
 			} else if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONCLUSAO")) {
-				listaProjetos.sort(Collator.getInstance());
-				listaProjetos = constitucionalSort(listaProjetos);
+				System.out.println(listaProjetos);
+				//listaProjetos.sort(Collator.getInstance().reversed());
+				//System.out.println(listaProjetos);
+				//listaProjetos = constitucionalSort(listaProjetos);
+				//listaProjetos.sort(Collator.);
 				listaProjetos = conclusaoSort(listaProjetos);
+				System.out.println("aq o: " + listaProjetos);
 				return listaProjetos.get(0);
 			}else {
+				
+				
 				return listaProjetos.get(0);
 			}
 		}
 	}
 	
 	public String pegarPropostaRelacionada(String dni) {
-		Validacao.validarString(dni, "Erro ao pegar proposta: dni nao pode ser vazio ou nulo");
-		Validacao.verificaDni(dni, "Erro ao pegar proposta: dni invalido");
+		Validacao.verificaDni(dni, "Erro ao pegar proposta relacionada: dni invalido");
+		Validacao.validarString(dni, "Erro ao pegar proposta relacionada: pessoa nao pode ser vazia ou nula");
 		if (!this.controlePessoa.getMapPessoa().containsKey(dni)) {
-			throw new IllegalArgumentException("Erro ao pegar proposta: pessoa inexistente");
+			throw new IllegalArgumentException("Erro ao pegar proposta relacionada: pessoa inexistente");
 		} 
 	
 		return propostaRelacionada(dni);
