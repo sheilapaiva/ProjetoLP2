@@ -148,11 +148,20 @@ public abstract class Projeto {
 		this.nomeComissao = nomeComissao;
 	}
 	
+<<<<<<< HEAD
+	public boolean getConclusivo() {
+		return getConclusivo();
+	}
+	
+    
+
+=======
 	/**
 	* Retorna a um inteiro referente uma representação númerica do objeto.
 	* 
 	* @return a um valor inteiro que representa o objeto.
 	*/
+>>>>>>> b15961650649fa601b9be2a22917f1f1e9ba58f5
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -48,5 +48,9 @@ public class Plp extends Projeto {
     	}
 		return mensagem;
     }
-    
+
+	public String getArtigos() {
+		return artigos;
+	}
+
 }
