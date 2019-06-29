@@ -64,12 +64,11 @@ public class ControleGeral{
 	 * Carrega o sistema.
 	 */
 	public void carregarSistema() {
-		this.controleComissao = (ControleComissao) this.dados.restaurar("controleComissao.txt");
-		this.controlePartido = (ControlePartido) this.dados.restaurar("controlePartido.txt");
-		this.controlePessoa = (ControlePessoa) this.dados.restaurar("controlePessoa.txt");
-		this.controleProjeto = (ControleProjeto) this.dados.restaurar("controleProjeto.txt");
-		this.controleVotacao = (ControleVotacao) this.dados.restaurar("controleVotacao.txt");
-		
+		this.dados.ler("controleComissao.bin");
+		this.dados.ler("controlePartido.bin");
+		this.dados.ler("controlePessoa.bin");
+		this.dados.ler("controleProjeto.bin");
+		this.dados.ler("controleVotacao.bin");
 	}
 	
 	/**
@@ -78,28 +77,18 @@ public class ControleGeral{
 	 * @throws FileNotFoundException 
 	 */
 	public void limparSistema()  {
-		//this.dados.limpar("controleComissao.txt");
-		//this.dados.limpar("controlePartido.txt");
-		//this.dados.limpar("controlePessoa.txt");
-		//this.dados.limpar("controleProjeto.txt");
-		//this.dados.limpar("controleVotacao.txt");
-		
-		//this.controleComissao = new ControleComissao();
-		//this.controlePartido = new ControlePartido();
-		//this.controlePessoa = new ControlePessoa();
-		//this.controleProjeto = new ControleProjeto();
-		//this.controleVotacao = new ControleVotacao();
+	
 	}
 	
 	/**
 	 * Salva o sistema.
 	 */
 	public void salvarSistema() {
-		this.dados.salvarObjeto(controleComissao, "controleComissao.txt");
-		this.dados.salvarObjeto(controlePartido, "controlePartido.txt");
-		this.dados.salvarObjeto(controlePessoa, "controlePessoa.txt");
-		this.dados.salvarObjeto(controleProjeto, "controleProjeto.txt");
-		this.dados.salvarObjeto(controleVotacao, "controleVotacao.txt");
+		this.dados.salvarObjeto(controleComissao, "controleComissao.bin");
+		this.dados.salvarObjeto(controlePartido, "controlePartido.bin");
+		this.dados.salvarObjeto(controlePessoa, "controlePessoa.bin");
+		this.dados.salvarObjeto(controleProjeto, "controleProjeto.bin");
+		this.dados.salvarObjeto(controleVotacao, "controleVotacao.bin");
 		
 	}
 

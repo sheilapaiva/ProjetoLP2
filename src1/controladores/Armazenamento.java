@@ -35,28 +35,34 @@ public class Armazenamento {
 		}
 
 	}
-
-	public static Object restaurar(String caminho) {
-
-		Object objeto = null;
-
-		try {
-			FileInputStream restFile = new FileInputStream(caminho);
-			ObjectInputStream stream = new ObjectInputStream(restFile);
-			objeto = stream.readObject();
-			stream.close();
-		} catch (Exception e) {
+	
+	public static String ler(String nomeArquivo){
+		BufferedReader br = null;
+		FileReader fr = null;
+		String resultado = "";
+		try{
+			fr = new FileReader(nomeArquivo);
+			br = new BufferedReader(fr);
+			String linha;
+			while((linha = br.readLine()) != null){
+				resultado += linha + "\n";
+			}
+			return resultado;
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			if (br != null)
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		}
-
-		return objeto;
-
+		return resultado;
 	}
 
-	public static void limpar(String arquivo){
-		File file = new File(arquivo);
-		file.delete();
-	} 
-	
+
 	
 }
