@@ -1,5 +1,7 @@
 package controladores;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 
@@ -62,14 +64,31 @@ public class ControleGeral{
 	 * Carrega o sistema.
 	 */
 	public void carregarSistema() {
+		this.controleComissao = (ControleComissao) this.dados.restaurar("controleComissao.txt");
+		this.controlePartido = (ControlePartido) this.dados.restaurar("controlePartido.txt");
+		this.controlePessoa = (ControlePessoa) this.dados.restaurar("controlePessoa.txt");
+		this.controleProjeto = (ControleProjeto) this.dados.restaurar("controleProjeto.txt");
+		this.controleVotacao = (ControleVotacao) this.dados.restaurar("controleVotacao.txt");
 		
 	}
 	
 	/**
 	 * Limpa o sistema.
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void limparSistema() {
+	public void limparSistema()  {
+		//this.dados.limpar("controleComissao.txt");
+		//this.dados.limpar("controlePartido.txt");
+		//this.dados.limpar("controlePessoa.txt");
+		//this.dados.limpar("controleProjeto.txt");
+		//this.dados.limpar("controleVotacao.txt");
 		
+		//this.controleComissao = new ControleComissao();
+		//this.controlePartido = new ControlePartido();
+		//this.controlePessoa = new ControlePessoa();
+		//this.controleProjeto = new ControleProjeto();
+		//this.controleVotacao = new ControleVotacao();
 	}
 	
 	/**
