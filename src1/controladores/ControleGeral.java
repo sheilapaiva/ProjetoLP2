@@ -19,6 +19,12 @@ import entidades.Validacao;
  */
 public class ControleGeral{
 	
+	
+	/**
+	 *  Dados. 
+	 */
+	private Armazenamento dados;
+	
 	/**
 	 * Controle de pessoas.
 	 */
@@ -49,6 +55,7 @@ public class ControleGeral{
 		this.controleComissao = new ControleComissao();
 		this.controleProjeto = new ControleProjeto();
 		this.controleVotacao = new ControleVotacao();
+		this.dados = new Armazenamento();
 	}
 	
 	/**
@@ -69,6 +76,11 @@ public class ControleGeral{
 	 * Salva o sistema.
 	 */
 	public void salvarSistema() {
+		this.dados.salvarObjeto(controleComissao, "controleComissao.txt");
+		this.dados.salvarObjeto(controlePartido, "controlePartido.txt");
+		this.dados.salvarObjeto(controlePessoa, "controlePessoa.txt");
+		this.dados.salvarObjeto(controleProjeto, "controleProjeto.txt");
+		this.dados.salvarObjeto(controleVotacao, "controleVotacao.txt");
 		
 	}
 
