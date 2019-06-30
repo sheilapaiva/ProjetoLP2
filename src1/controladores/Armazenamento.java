@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Writer;
 
 
@@ -61,6 +62,19 @@ public class Armazenamento {
 				}
 		}
 		return resultado;
+	}
+	
+	public void limpar(String arquivo) {
+		File file = new File(arquivo);
+		try {
+			PrintWriter pw = new PrintWriter(file);
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 

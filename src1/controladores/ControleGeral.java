@@ -77,7 +77,12 @@ public class ControleGeral{
 	 * @throws FileNotFoundException 
 	 */
 	public void limparSistema()  {
-	
+		this.dados.limpar("controleComissao.bin");
+		this.dados.limpar("controlePartido.bin");
+		this.dados.limpar("controlePessoa.bin");
+		this.dados.limpar("controleProjeto.bin");
+		this.dados.limpar("controleVotacao.bin");
+		
 	}
 	
 	/**
