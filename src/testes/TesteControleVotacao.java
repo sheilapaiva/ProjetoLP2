@@ -1,7 +1,8 @@
-package controladores;
+package testes;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import projetoLP2.ControleVotacao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
