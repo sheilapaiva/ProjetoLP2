@@ -16,6 +16,11 @@ import entidades.Partido;
 public class NomeComparadorPartido implements Comparator<Partido> , Serializable{
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	* Compara dois objetos Partidos, retorna a diferença entre as Strings nome 
 	* definindo a sua ordem alfabética. 
 	* 

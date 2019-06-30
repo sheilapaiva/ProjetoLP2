@@ -13,6 +13,10 @@ import java.io.Serializable;
 public class Partido implements Serializable {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Nome do partido.
 	 */
 	private String partido;

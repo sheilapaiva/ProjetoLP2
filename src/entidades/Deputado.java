@@ -13,6 +13,11 @@ import java.io.Serializable;
 public class Deputado implements Cargo , Serializable  {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * Data do inicio do mandato
 	 */
 	private String dataInicio;

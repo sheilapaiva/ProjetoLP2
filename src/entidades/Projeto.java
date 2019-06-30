@@ -14,6 +14,11 @@ import java.io.Serializable;
 public abstract class Projeto implements Serializable {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * o numero do projeto
 	 */
 	protected int numProjeto;

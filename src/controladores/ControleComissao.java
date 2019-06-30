@@ -17,6 +17,11 @@ import entidades.Comissao;
 public class ControleComissao implements Serializable {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * Mapa de comissoes.
 	 */
 	private HashMap <String, Comissao> mapComissao;

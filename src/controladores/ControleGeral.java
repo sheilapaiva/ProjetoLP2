@@ -21,7 +21,6 @@ import entidades.Validacao;
  */
 public class ControleGeral{
 	
-	
 	/**
 	 *  Dados. 
 	 */
@@ -73,7 +72,8 @@ public class ControleGeral{
 	
 	/**
 	 * Limpa o sistema.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 * @throws FileNotFoundException 
 	 */
 	public void limparSistema()  {
@@ -93,8 +93,7 @@ public class ControleGeral{
 		this.dados.salvarObjeto(controlePartido, "controlePartido.bin");
 		this.dados.salvarObjeto(controlePessoa, "controlePessoa.bin");
 		this.dados.salvarObjeto(controleProjeto, "controleProjeto.bin");
-		this.dados.salvarObjeto(controleVotacao, "controleVotacao.bin");
-		
+		this.dados.salvarObjeto(controleVotacao, "controleVotacao.bin");	
 	}
 
 	/**
@@ -443,7 +442,7 @@ public class ControleGeral{
 			}
 		} else {
 			if (this.controleProjeto.getMapProjetos().get(codigo).getCodigo().substring(0,3).equals("PL ")){
-				if (proximoLocal.equals("plenario") && ((Pl)this.controleProjeto.getMapProjetos().get(codigo)).getConclusivo()) {
+				if (proximoLocal.equals("plenario") && !((Pl)this.controleProjeto.getMapProjetos().get(codigo)).getConclusivo()) {
 					this.controleProjeto.getMapProjetos().get(codigo).setSituacao("EM VOTACAO");
 					this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario");	
 				} else {

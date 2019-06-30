@@ -1,19 +1,21 @@
-package controladores;
+package testes;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import controladores.ControleVotacao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TesteControleVotacao {
 
-    ControleVotacao cv = new ControleVotacao();
+    ControleVotacao cv;
+    
     @BeforeEach
-
     void setUp(){
-
-
+    	cv = new ControleVotacao();
     }
+    
     @Test
     void testaRealizarVotacaoPl(){
         assertEquals(true, cv.realizarVotacao("plsaude9","CGOV",6,10,"PL"));
@@ -70,7 +72,5 @@ class TesteControleVotacao {
         assertEquals("APROVADO (CGOV)",cv.exibirTramitacao("plpsaude9"));
         assertEquals("REJEITADO (CGOV)",cv.exibirTramitacao("plpsaude8"));
     }
-
-
 
 }

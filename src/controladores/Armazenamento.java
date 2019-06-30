@@ -1,33 +1,26 @@
 package controladores;
 
-import java.*;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.io.Writer;
 
 /**
- * Representa a classe Armazenamento, que serve para auxiliar nas operações de leitura/escrita de arquivos
+ * Representa a classe Armazenamento, que serve para auxiliar nas operacoes de leitura/escrita de arquivos
+ * 
  * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
  * @author Caio Jose dos Santos Arruda - Matricula: 118210844
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
- * 
  */
-
 public class Armazenamento {
 
 	/**
-	 * Constrói um Armazenamento.
+	 * Constroi um Armazenamento.
 	 */
 	public Armazenamento() {
 
@@ -35,9 +28,10 @@ public class Armazenamento {
 
 	/**
 	 * Salva o objeto em um arquivo binario.
-	 * Ao salvar, exibe uma mensagem de conclusão do salvamento.
+	 * Ao salvar, exibe uma mensagem de conclusao do salvamento.
+	 * 
 	 * @param dados Objeto passado como parametro
-	 * @param nomeArquivo arquivo em que o objeto será salvo.
+	 * @param nomeArquivo arquivo em que o objeto sera salvo.
 	 */
 	public void salvarObjeto(Object dados, String nomeArquivo) {
 		try {
@@ -54,12 +48,12 @@ public class Armazenamento {
 	}
 	
 	/**
-	 * Lê o arquivo passado como parametro utilizando um buffer, dessa forma, permite o "ressurgimento" do objeto
-	 * @param nomeArquivo
-	 * @return retorna o resultado da leitura. 
+	 * Ler o arquivo passado como parametro utilizando um buffer, dessa forma, permite o "ressurgimento" do objeto
+	 * 
+	 * @param nomeArquivo, o nome do arquivo
+	 * @return o resultado da leitura. 
 	 */
-	
-	public static String ler(String nomeArquivo){
+	public String ler(String nomeArquivo){
 		BufferedReader br = null;
 		FileReader fr = null;
 		String resultado = "";
@@ -83,12 +77,13 @@ public class Armazenamento {
 					e.printStackTrace();
 				}
 		}
+		
 		return resultado;
 	}
 	
 	/**
 	 * Limpa o arquivo passado como paramêtro e permite que o arquivo seja sobrescrito.
-	 * @param arquivo binario 
+	 * @param arquivo, o arquivo binario
 	 */
 	public void limpar(String arquivo) {
 		File file = new File(arquivo);
@@ -96,13 +91,7 @@ public class Armazenamento {
 			PrintWriter pw = new PrintWriter(file);
 			pw.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
+		}	
 	}
-
-
-	
 }

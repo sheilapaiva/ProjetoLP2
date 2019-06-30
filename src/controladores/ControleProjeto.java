@@ -20,6 +20,11 @@ import entidades.Projeto;
 public class ControleProjeto implements Serializable {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * Mapa de projetos.
 	 */
 	private HashMap<String, Projeto> mapProjetos;

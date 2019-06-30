@@ -13,6 +13,11 @@ import java.io.Serializable;
 public class Votacao implements Serializable {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * Status da votacao.
 	 */
 	private String status;

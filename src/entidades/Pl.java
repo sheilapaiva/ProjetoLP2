@@ -11,6 +11,11 @@ package entidades;
 public class Pl extends Projeto {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * O conclusivo do projeto
 	 */
     private boolean conclusivo;

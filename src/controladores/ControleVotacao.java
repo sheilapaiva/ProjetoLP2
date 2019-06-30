@@ -17,6 +17,11 @@ import entidades.Votacao;
 public class ControleVotacao implements Serializable{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * Mapa de votacao.
 	 */
 	private HashMap<String, ArrayList<Votacao>> mapVotacao;

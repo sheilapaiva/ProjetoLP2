@@ -1,7 +1,5 @@
 package entidades;
 
-import java.io.Serializable;
-
 /**
  * Representa uma interface de um Cargo de pessoa. 
  * 

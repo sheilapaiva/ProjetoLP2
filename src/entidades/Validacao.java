@@ -16,6 +16,11 @@ import java.util.Date;
 public class Validacao implements Serializable  {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Verifica se uma String passada por parametro eh nula ou vazia.
 	 * 
 	 * @param palavra, a String a ser verificada
