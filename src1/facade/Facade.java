@@ -228,7 +228,12 @@ public class Facade {
 	
 	public static void main(String[] args) {
 		//args = new String[] {"projetoLP2.Facade", "testes-eco/use_case_1.txt", "testes-eco/use_case_2.txt", "testes-eco/use_case_3.txt", "testes-eco/use_case_4.txt", "testes-eco/use_case_5.txt", "testes-eco/use_case_6.txt"}; 
+<<<<<<< refs/remotes/origin/sheila:src1/facade/Facade.java
 		args = new String[] {"facade.Facade", "testes-eco/use_case_7.txt",  "testes-eco/use_case_8.txt",  "testes-eco/use_case_9.txt"};
+=======
+		//args = new String[] {"facade.Facade", "testes-eco/use_case_7.txt",  "testes-eco/use_case_8.txt",  "testes-eco/use_case_9.txt"};
+		args = new String[] {"facade.Facade", "testes-eco/use_case_7.txt", "testes-eco/use_case_8.txt", "testes-eco/use_case_9.txt"};
+>>>>>>> local:src/facade/Facade.java
 		EasyAccept.main(args);
 	}
 }
