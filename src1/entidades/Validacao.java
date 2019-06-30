@@ -1,5 +1,6 @@
 package entidades;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Date;
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
-public class Validacao {
+public class Validacao implements Serializable  {
 	
 	/**
 	 * Verifica se uma String passada por parametro eh nula ou vazia.

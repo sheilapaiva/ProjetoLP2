@@ -1,5 +1,7 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  * Representação de um Partido. Um partido e representado por um nome.
  * 
@@ -8,7 +10,7 @@ package entidades;
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
-public class Partido {
+public class Partido implements Serializable {
 	
 	/**
 	 * Nome do partido.
