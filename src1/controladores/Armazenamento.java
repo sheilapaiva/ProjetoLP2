@@ -15,14 +15,30 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-
+/**
+ * Representa a classe Armazenamento, que serve para auxiliar nas operações de leitura/escrita de arquivos
+ * @author Andre Luis Souza de Andrade Santana - Matricula: 118210116
+ * @author Caio Jose dos Santos Arruda - Matricula: 118210844
+ * @author Joao Vitor Romao Patricio - Matricula: 118211058
+ * @author Sheila Maria Mendes Paiva - Matricula: 118210186
+ * 
+ */
 
 public class Armazenamento {
 
+	/**
+	 * Constrói um Armazenamento.
+	 */
 	public Armazenamento() {
 
 	}
 
+	/**
+	 * Salva o objeto em um arquivo binario.
+	 * Ao salvar, exibe uma mensagem de conclusão do salvamento.
+	 * @param dados Objeto passado como parametro
+	 * @param nomeArquivo arquivo em que o objeto será salvo.
+	 */
 	public void salvarObjeto(Object dados, String nomeArquivo) {
 		try {
 			FileOutputStream fs = new FileOutputStream(nomeArquivo);
@@ -36,6 +52,12 @@ public class Armazenamento {
 		}
 
 	}
+	
+	/**
+	 * Lê o arquivo passado como parametro utilizando um buffer, dessa forma, permite o "ressurgimento" do objeto
+	 * @param nomeArquivo
+	 * @return retorna o resultado da leitura. 
+	 */
 	
 	public static String ler(String nomeArquivo){
 		BufferedReader br = null;
@@ -64,6 +86,10 @@ public class Armazenamento {
 		return resultado;
 	}
 	
+	/**
+	 * Limpa o arquivo passado como paramêtro e permite que o arquivo seja sobrescrito.
+	 * @param arquivo binario 
+	 */
 	public void limpar(String arquivo) {
 		File file = new File(arquivo);
 		try {
