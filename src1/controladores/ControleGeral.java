@@ -1,11 +1,5 @@
 package controladores;
 
-<<<<<<< refs/remotes/origin/sheila:src1/controladores/ControleGeral.java
-import java.text.Collator;
-=======
-import java.io.FileNotFoundException;
-import java.io.IOException;
->>>>>>> local:src/controladores/ControleGeral.java
 import java.util.ArrayList;
 
 import entidades.Comissao;
@@ -423,7 +417,7 @@ public class ControleGeral{
 			}
 		} else {
 			if (this.controleProjeto.getMapProjetos().get(codigo).getCodigo().substring(0,3).equals("PL ")){
-				if (proximoLocal.equals("plenario") && ((Pl)this.controleProjeto.getMapProjetos().get(codigo)).getConclusivo()) {
+				if (proximoLocal.equals("plenario") && !((Pl)this.controleProjeto.getMapProjetos().get(codigo)).getConclusivo()) {
 					this.controleProjeto.getMapProjetos().get(codigo).setSituacao("EM VOTACAO");
 					this.controleProjeto.getMapProjetos().get(codigo).setNomeComissao("Plenario");	
 				} else {

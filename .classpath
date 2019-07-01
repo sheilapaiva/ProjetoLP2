@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="/home/sheilammp/eclipse-workspace/ProjetoLP2/lib/easyaccept.jar"/>
+	<classpathentry kind="lib" path="/home/sheila/eclipse-workspace/ProjetoLP2/lib/easyaccept.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
