@@ -1,5 +1,7 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  * Representacao de uma pessoa. Uma pessoa é representada por um nome, dni, origem, partido e interesses.
  * 
@@ -8,8 +10,13 @@ package entidades;
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
-public class Pessoa {
+public class Pessoa implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Nome da pessoa.
 	 */

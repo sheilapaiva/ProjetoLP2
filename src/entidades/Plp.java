@@ -11,6 +11,11 @@ package entidades;
 public class Plp extends Projeto {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * Os artigos do projeto
 	 */
     private String artigos;

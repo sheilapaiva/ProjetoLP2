@@ -8,7 +8,7 @@ package entidades;
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
-public interface Cargo {
+public interface Cargo  {
 	
 	/**
 	 * Retorna uma String que representa a data do inicio.

@@ -1,5 +1,6 @@
 package entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,8 +11,13 @@ import java.util.ArrayList;
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
-public class Comissao {
+public class Comissao implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Tema da comissao
 	 */

@@ -1,5 +1,7 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  * Representacao de um projeto. Um projeto é representado por um numero, codigo, dni, ano, ementa, interesses,
  * situacao, nome da comissao e url.
@@ -9,8 +11,13 @@ package entidades;
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
-public abstract class Projeto {
+public abstract class Projeto implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * o numero do projeto
 	 */

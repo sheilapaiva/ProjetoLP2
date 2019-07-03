@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
 	<classpathentry kind="src" path="src1"/>
+=======
+	<classpathentry kind="src" path="src"/>
+>>>>>>> e9116af273a4fa72d5fa708b3e31eb61fad25b7b
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>

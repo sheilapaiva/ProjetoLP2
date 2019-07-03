@@ -1,5 +1,7 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  * Representacao de um deputado. Uma deputado é representada por uma pessoa e a data de inicio do mandato.
  * 
@@ -8,7 +10,12 @@ package entidades;
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
-public class Deputado implements Cargo {
+public class Deputado implements Cargo , Serializable  {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Data do inicio do mandato

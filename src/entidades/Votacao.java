@@ -1,5 +1,7 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  * Representação de uma Votacao, responsável realizar a votacao de um projeto.
  * 
@@ -8,7 +10,12 @@ package entidades;
  * @author Joao Vitor Romao Patricio - Matricula: 118211058
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
-public class Votacao {
+public class Votacao implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Status da votacao.

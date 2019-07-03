@@ -1,5 +1,9 @@
 package controladores;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.Collator;
+>>>>>>> e9116af273a4fa72d5fa708b3e31eb61fad25b7b:src/controladores/ControleGeral.java
 import java.util.ArrayList;
 
 import entidades.Comissao;
@@ -17,6 +21,11 @@ import entidades.Validacao;
  * @author Sheila Maria Mendes Paiva - Matricula: 118210186
  */
 public class ControleGeral{
+	
+	/**
+	 *  Dados. 
+	 */
+	private Armazenamento dados;
 	
 	/**
 	 * Controle de pessoas.
@@ -48,19 +57,32 @@ public class ControleGeral{
 		this.controleComissao = new ControleComissao();
 		this.controleProjeto = new ControleProjeto();
 		this.controleVotacao = new ControleVotacao();
+		this.dados = new Armazenamento();
 	}
 	
 	/**
 	 * Carrega o sistema.
 	 */
 	public void carregarSistema() {
-		
+		this.dados.ler("controleComissao.bin");
+		this.dados.ler("controlePartido.bin");
+		this.dados.ler("controlePessoa.bin");
+		this.dados.ler("controleProjeto.bin");
+		this.dados.ler("controleVotacao.bin");
 	}
 	
 	/**
 	 * Limpa o sistema.
+	 * 
+	 * @throws IOException
+	 * @throws FileNotFoundException 
 	 */
-	public void limparSistema() {
+	public void limparSistema()  {
+		this.dados.limpar("controleComissao.bin");
+		this.dados.limpar("controlePartido.bin");
+		this.dados.limpar("controlePessoa.bin");
+		this.dados.limpar("controleProjeto.bin");
+		this.dados.limpar("controleVotacao.bin");
 		
 	}
 	
@@ -68,7 +90,11 @@ public class ControleGeral{
 	 * Salva o sistema.
 	 */
 	public void salvarSistema() {
-		
+		this.dados.salvarObjeto(controleComissao, "controleComissao.bin");
+		this.dados.salvarObjeto(controlePartido, "controlePartido.bin");
+		this.dados.salvarObjeto(controlePessoa, "controlePessoa.bin");
+		this.dados.salvarObjeto(controleProjeto, "controleProjeto.bin");
+		this.dados.salvarObjeto(controleVotacao, "controleVotacao.bin");	
 	}
 
 	/**
