@@ -3,6 +3,7 @@ package controladores;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.Collator;
+>>>>>>> e9116af273a4fa72d5fa708b3e31eb61fad25b7b:src/controladores/ControleGeral.java
 import java.util.ArrayList;
 
 import entidades.Comissao;
@@ -640,8 +641,9 @@ public class ControleGeral{
 	 * @param dni, o dni do deputado
 	 * @return ArrayList referente aos codigos dos projetos com mais interesses em comum com o deputado
 	 */
-	private ArrayList<String> contagemProjInteressesDep(String dni) {
-		ArrayList<String> projetos = new ArrayList<String>(this.controleProjeto.getMapProjetos().keySet());
+	private ArrayList<Projeto> contagemProjInteressesDep(String dni) {
+		ArrayList<String> projetos = new ArrayList<>();
+		projetos.addAll(this.controleProjeto.getMapProjetos().keySet());
 		String [] interessesDep = this.controlePessoa.getMapPessoa().get(dni).getInteresses().split(",");
 		String projetoInteresseMaior = "";
 		int cont = 0;
@@ -667,13 +669,18 @@ public class ControleGeral{
 			}
 		}
 		
-		ArrayList<String> listaProjetos = new ArrayList<String>();
-		String[] projeto = projetoInteresseMaior.split(",");
-		for (String proj : projeto) {
-			listaProjetos.add(proj);
+		ArrayList<Projeto> listaProjetos = new ArrayList<Projeto>();
+		if (projetoInteresseMaior.equals("")) {
+			return listaProjetos;
+		} else {
+			String[] projeto = projetoInteresseMaior.split(",");
+			for (String proj : projeto) {
+				listaProjetos.add(this.controleProjeto.getMapProjetos().get(proj));
+			}
+			
+			return listaProjetos;
 		}
 	
-		return listaProjetos;
 	}
 	
 	/**
@@ -682,32 +689,29 @@ public class ControleGeral{
 	 * @param listaProjetos, ArrayList de projetos
 	 * @return ArrayList ordenado
 	 */
-	private ArrayList<String> constitucionalSort(ArrayList<String> listaProjetos){
-        boolean troca = true;
-        String aux;
-        while (troca) {
-            troca = false;
-            for (int i = 0; i < listaProjetos.size() - 1; i++) {
-                if (listaProjetos.get(i).substring(0, 3).equals("PL ") && listaProjetos.get(i + 1).substring(0, 3).equals("PEC")) {
-                	aux = listaProjetos.get(i);
-                    listaProjetos.set(i, listaProjetos.get(i + 1));
-                    listaProjetos.set(i + 1, aux);
-                    troca = true;
-                } else if (listaProjetos.get(i).substring(0, 3).equals("PLP") && listaProjetos.get(i + 1).substring(0, 3).equals("PEC")) {
-                	aux = listaProjetos.get(i);
-                    listaProjetos.set(i, listaProjetos.get(i + 1));
-                    listaProjetos.set(i + 1, aux);
-                    troca = true;
-                } else if (listaProjetos.get(i).substring(0, 3).equals("PL ") && listaProjetos.get(i + 1).substring(0, 3).equals("PLP")) {
-                    aux = listaProjetos.get(i);
-                    listaProjetos.set(i, listaProjetos.get(i + 1));
-                    listaProjetos.set(i + 1, aux);
-                    troca = true;
-                }
+	private String constitucionalSort(ArrayList<Projeto> listaProjetos){
+		String codigo = "";
+		for (int i = 0; i < listaProjetos.size(); i++) {
+			if (codigo.equals("")) {
+            	codigo = listaProjetos.get(i).getCodigo();
+            } else if (codigo.substring(0, 3).equals("PL ") && listaProjetos.get(i).getCodigo().substring(0, 3).equals("PEC")) {
+                codigo = listaProjetos.get(i).getCodigo();
+            } else if (codigo.substring(0, 3).equals("PL ") && listaProjetos.get(i + 1).getCodigo().substring(0, 3).equals("PLP")) {
+                codigo = listaProjetos.get(i).getCodigo();
+            } else if (codigo.substring(0, 3).equals("PLP") && listaProjetos.get(i).getCodigo().substring(0, 3).equals("PEC")) {
+            	codigo = listaProjetos.get(i).getCodigo();
+            } else if (codigo.substring(0, 3).equals(listaProjetos.get(i).getCodigo().substring(0, 3))) {
+            	if (this.controleProjeto.getMapProjetos().get(codigo).getAno() > listaProjetos.get(i).getAno()) {
+	            	codigo = listaProjetos.get(i).getCodigo();
+	            } else if (this.controleProjeto.getMapProjetos().get(codigo).getAno() == listaProjetos.get(i).getAno()) {
+	            	if (this.controleProjeto.getMapProjetos().get(codigo).getNum() > listaProjetos.get(i).getNum()) {
+	            		codigo = listaProjetos.get(i).getCodigo();
+	            	}
+	            }
             }
         } 
-        
-        return listaProjetos;
+		
+        return codigo;
 	}
 	
 	/**
@@ -716,80 +720,65 @@ public class ControleGeral{
 	 * @param listaProjetos, ArrayList de projetos
 	 * @return ArrayList ordenado
 	 */
-	private ArrayList<String> conclusaoSort(ArrayList<String> listaProjetos){
-		boolean troca = true;
-        String aux;
-        while (troca) {
-            troca = false;
-            for (int i = 0; i < listaProjetos.size() - 1; i++) {
-            	if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 2o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 2o turno")) {
-            		listaProjetos.remove(i + 1);
-                    troca = true;
-                    break;
-                } else if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getSituacao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 1o turno") && !this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getSituacao().equals("Plenario - 2o turno")) {
-                	listaProjetos.remove(i + 1);
-            		aux = listaProjetos.get(i);
-                    listaProjetos.set(i, listaProjetos.get(i + 1));
-                    listaProjetos.set(i + 1, aux);
-                    troca = true;
-                    break;
-        		} else if (!this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getNomeComissao().equals("CCJC") && this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getNomeComissao().equals("CCJC")) {
-        			listaProjetos.remove(i + 1);
-        			System.out.println("kkkkk");
-            		
-        			aux = listaProjetos.get(i);
-                    listaProjetos.set(i, listaProjetos.get(i + 1));
-                    listaProjetos.set(i + 1, aux);
-        			System.out.println("entrou aq");
-                    troca = true;
-                    break;
-        		} 
-            }
-        }      
-       
-        System.out.println(listaProjetos);
-        if (listaProjetos.size() > 1) {
-        	
-        }
-	        troca = true;
-	        while (troca) {
-	            troca = false;
-	            for (int i = 0; i < listaProjetos.size() - 1; i++) {
-	            	System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getAno());
-	            	System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getAno());
-	
-	            	if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getAno() > this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getAno()) {
-				        			aux = listaProjetos.get(i);
-				                    listaProjetos.set(i, listaProjetos.get(i + 1));
-				                    listaProjetos.set(i + 1, aux);
-				                    listaProjetos.remove(i);
-				                    troca = true;
-				                    System.out.println("kkkkk");
-				                   break;
-	                	}
-	               	 
-	                else if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getAno() == this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getAno()) {
-	                	System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getNum());
-	                	System.out.println(this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getNum());
-	                	  if (this.controleProjeto.getMapProjetos().get(listaProjetos.get(i)).getNum() > this.controleProjeto.getMapProjetos().get(listaProjetos.get(i + 1)).getNum()) {
-			                	aux = listaProjetos.get(i);
-			                    listaProjetos.set(i, listaProjetos.get(i + 1));
-			                    listaProjetos.set(i + 1, aux);
-			                    listaProjetos.remove(i);
-			                    System.out.println("kkkassskk");
-			                    troca = true;
-			                    break;
-	                		}
-		                  
+	private String conclusaoSort(ArrayList<Projeto> listaProjetos){
+		String codigo = "";
+		for (int i = 0; i < listaProjetos.size(); i++) {	
+			if (codigo.equals("")) {
+				codigo = listaProjetos.get(i).getCodigo();
+			} else if (!codigo.equals("Plenario - 2o turno") && listaProjetos.get(i).getNomeComissao().equals("Plenario - 2o turno")){
+				codigo = listaProjetos.get(i).getCodigo();
+			} else if (!codigo.equals("Plenario - 1o turno") && !codigo.equals("Plenario - 2o turno") && listaProjetos.get(i).getNomeComissao().equals("Plenario - 1o turno")){
+				codigo = listaProjetos.get(i).getCodigo();
+			} else if (!codigo.equals("Plenario") && listaProjetos.get(i).getNomeComissao().equals("Plenario")) {
+				codigo = listaProjetos.get(i).getCodigo();
+			} else if (codigo.equals("CCJC") && !listaProjetos.get(i).getNomeComissao().equals("CCJC")) {
+				codigo = listaProjetos.get(i).getCodigo();
+			} else {
+				if (this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals(listaProjetos.get(i).getNomeComissao())) {
+					if (this.controleProjeto.getMapProjetos().get(codigo).getAno() > listaProjetos.get(i).getAno()) {
+						codigo = listaProjetos.get(i).getCodigo();
+		            } else if (this.controleProjeto.getMapProjetos().get(codigo).getAno() == listaProjetos.get(i).getAno()) {
+		            	if (this.controleProjeto.getMapProjetos().get(codigo).getNum() > listaProjetos.get(i).getNum()) {
+		            		codigo = listaProjetos.get(i).getCodigo();
+		            	}
 		            }
-                
-                }
-        }  
-  
-        return listaProjetos;
-		
-	}
+				} else if (!this.controleProjeto.getMapProjetos().get(codigo).getNomeComissao().equals(listaProjetos.get(i).getNomeComissao())) {
+					
+				}
 
+			}
+		}
+		
+		return codigo;
+	}
+	
+	/**
+	 * Ordena o ArrayList de codigos dos projetos de acordo com a estrategia Aprovacao.
+	 * 
+	 * @param listaProjetos, ArrayList de projetos
+	 * @return ArrayList ordenado
+	 */
+	private String aprovacaoSort(ArrayList<Projeto> listaProjetos){
+		String codigo = "";
+		for (int i = 0; i < listaProjetos.size(); i++) {
+			if (codigo.equals("")) {
+				codigo = listaProjetos.get(i).getCodigo();
+			} else if (this.controleVotacao.getMapVotacao().get(codigo).size() < this.controleVotacao.getMapVotacao().get(listaProjetos.get(i).getCodigo()).size()) {
+				codigo = listaProjetos.get(i).getCodigo();
+			}else if (this.controleVotacao.getMapVotacao().get(codigo) == this.controleVotacao.getMapVotacao().get(listaProjetos.get(i).getCodigo())){
+				if (this.controleProjeto.getMapProjetos().get(codigo).getAno() > listaProjetos.get(i).getAno()) {
+					codigo = listaProjetos.get(i).getCodigo();
+	            } else if (this.controleProjeto.getMapProjetos().get(codigo).getAno() == listaProjetos.get(i).getAno()) {
+	            	if (this.controleProjeto.getMapProjetos().get(codigo).getNum() > listaProjetos.get(i).getNum()) {
+	            		codigo = listaProjetos.get(i).getCodigo();
+	            	}
+	            }
+			} 
+		}		
+
+		return codigo;
+	}
+	
 	/**
 	 * Exibe a proposta mais relacionada com o deputado com o dni passado por parametro, respeitando os criterios de empate.
 	 *  
@@ -797,30 +786,16 @@ public class ControleGeral{
 	 * @return String referente ao codigo do projeto mais relacionado
 	 */
 	private String propostaRelacionada(String dni) {
-		ArrayList<String> listaProjetos = contagemProjInteressesDep(dni);	
-
-		if (listaProjetos.get(0).equals("")) {
-			return "";
-		} else {
-			if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONSTITUCIONAL")) {
-				listaProjetos.sort(Collator.getInstance());
-				listaProjetos = constitucionalSort(listaProjetos);
-				return listaProjetos.get(0);
-			} else if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONCLUSAO")) {
-				System.out.println(listaProjetos);
-				//listaProjetos.sort(Collator.getInstance());
-				//System.out.println(listaProjetos);
-				listaProjetos = constitucionalSort(listaProjetos);
-				//listaProjetos.sort(Collator.);
-				listaProjetos = conclusaoSort(listaProjetos);
-				System.out.println("aq o: " + listaProjetos);
-				return listaProjetos.get(0);
-			}else {
-				
-				
-				return listaProjetos.get(0);
-			}
+		ArrayList<Projeto> listaProjetos = new ArrayList<>();
+		listaProjetos.addAll(contagemProjInteressesDep(dni));
+		if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONSTITUCIONAL")) {
+			return constitucionalSort(listaProjetos);
+		} else if (this.controlePessoa.getMapPessoa().get(dni).getEstrategia().equals("CONCLUSAO")) {
+			return conclusaoSort(listaProjetos);
+		}else {
+			return aprovacaoSort(listaProjetos);
 		}
+		
 	}
 	
 	/**

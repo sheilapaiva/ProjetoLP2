@@ -1,246 +1,285 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="projetoLP2.Partido" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/Partido.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="501" y="1486"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="projetoLP2.NomeComparadorPartido" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/NomeComparadorPartido.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="241" y="146"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="projetoLP2.Facade" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="629" y="245"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="projetoLP2.Pessoa" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/Pessoa.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="506" y="1187"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="projetoLP2.Pec" project="ProjetoLP2" file="/ProjetoLP2/src/projetoLP2/Pec.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="733" y="1459"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="projetoLP2.Validacao" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/Validacao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1124" y="173"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="projetoLP2.Comissao" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/Comissao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="113" y="1106"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="8" language="java" name="projetoLP2.Cargo" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/Cargo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="329" y="1450"/>    
+  <interface id="1" language="java" name="entidades.Cargo" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/Cargo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="592" y="2004"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="9" language="java" name="projetoLP2.ControleComissao" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/ControleComissao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="168" y="825"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="projetoLP2.ControleGeral" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/ControleGeral.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="629" y="580"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="projetoLP2.Plp" project="ProjetoLP2" file="/ProjetoLP2/src/projetoLP2/Plp.java" 
+  <class id="2" language="java" name="entidades.Pl" project="ProjetoLP2" file="/ProjetoLP2/src1/entidades/Pl.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1021" y="1459"/>    
+    <position height="-1" width="-1" x="968" y="2093"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="projetoLP2.ControlePessoa" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/ControlePessoa.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="480" y="870"/>    
+  <class id="3" language="java" name="controladores.ControlePartido" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/controladores/ControlePartido.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1" y="1317"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="projetoLP2.Deputado" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/Deputado.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="289" y="1088"/>    
+  <class id="4" language="java" name="controladores.ControlePessoa" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/controladores/ControlePessoa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="614" y="1326"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="projetoLP2.ControleProjeto" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/ControleProjeto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1043" y="870"/>    
+  <class id="5" language="java" name="entidades.Validacao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/Validacao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="294" y="165"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="projetoLP2.Pl" project="ProjetoLP2" file="/ProjetoLP2/src/projetoLP2/Pl.java" 
+  <class id="6" language="java" name="entidades.Partido" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/Partido.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-1" y="1532"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="entidades.Pec" project="ProjetoLP2" file="/ProjetoLP2/src1/entidades/Pec.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1309" y="1459"/>    
+    <position height="-1" width="-1" x="1257" y="2091"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="projetoLP2.Projeto" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/Projeto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1017" y="1133"/>    
+  <class id="8" language="java" name="facade.Facade" project="ProjetoLP2" file="/ProjetoLP2/src1/facade/Facade.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="626" y="305"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="projetoLP2.ControlePartido" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projetoLP2/ControlePartido.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="761" y="834"/>    
+  <class id="9" language="java" name="entidades.Pessoa" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/Pessoa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="606" y="1671"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="18">    
-    <bendpoint x="650" y="1013"/>    
+  <class id="10" language="java" name="entidades.NomeComparadorPartido" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/NomeComparadorPartido.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="294" y="334"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="controladores.ControleVotacao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/controladores/ControleVotacao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="284" y="1317"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="entidades.Votacao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/Votacao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="278" y="1592"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="entidades.Deputado" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/Deputado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="591" y="2195"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="controladores.ControleComissao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/controladores/ControleComissao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="928" y="1299"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="entidades.Comissao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/Comissao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="897" y="1532"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="entidades.Plp" project="ProjetoLP2" file="/ProjetoLP2/src1/entidades/Plp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1541" y="2089"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="controladores.ControleGeral" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/controladores/ControleGeral.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="626" y="883"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="controladores.ControleProjeto" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/controladores/ControleProjeto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1254" y="1362"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="entidades.Projeto" project="ProjetoLP2" 
+    file="/ProjetoLP2/src1/entidades/Projeto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1256" y="1744"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="20">    
     <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="19" name="partidos">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="20" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+      <attribute id="21" name="controleVotacao"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="22" name="mapPessoa">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="23" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="23">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="24" name="controleGeral"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="27" name="mapProjetos"/>      
+      <multiplicity id="28" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="30" name="controlePessoa"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="25" name="funcao">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="26" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <generalization id="32">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <association id="35">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="36" name="controleProjeto"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="27">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
-  <generalization id="28">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
-  <generalization id="29">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
-  <association id="30">    
+  <association id="38">    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="31" name="mapProjetos">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="32" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+      <attribute id="39" name="mapComissao"/>      
+      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="33">    
+  <realization id="41">    
     <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="TARGET" refId="1"/>  
   </realization>  
-  <association id="34">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="35" name="partido">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="36" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="42">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="43" name="controlePartido"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="46" name="controleComissao"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="49" name="funcao"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="37">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="38" name="mapComissao">        
-        <position height="0" width="0" x="0" y="0"/>      
+  <dependency id="51">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <association id="52">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="53" name="partidos">        
+        <position height="17" width="46" x="-84" y="1420"/>      
       </attribute>      
-      <multiplicity id="39" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+      <multiplicity id="54" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="56" name="mapPessoa"/>      
+      <multiplicity id="57" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
